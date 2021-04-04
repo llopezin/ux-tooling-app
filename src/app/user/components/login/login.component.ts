@@ -26,11 +26,19 @@ export class LoginComponent {
     });
   }
 
-  onSubmit(){
-    console.log(this.action);
-    
-    if(this.action === 'login') this.login();
-    if(this.action === 'register') this.register()
+  onSubmit() {
+    const passwordHasValidLength = this.loginForm.get('password').errors?.minlength === undefined
+
+
+    if (!passwordHasValidLength) {
+      this.message = this.action === 'register' ? "Password is too short" : "Invalid Credentials"
+      return
+    }
+
+    this.message = ""
+
+    /*  if(this.action === 'login') this.login();
+     if(this.action === 'register') this.register() */
   }
 
   login() {

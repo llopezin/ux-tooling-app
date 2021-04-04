@@ -1,25 +1,51 @@
-<div class="form-group">
-  <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-    <div class="user-name">
-      <input type="text" placeholder="email" required name="email" formControlName="email" />
-      <div *ngIf="
-          (loginForm.get('email').dirty || message) &&
-          loginForm.get('email').invalid
-        ">
-        Email is required
-      </div>
+<main class="[ section__full-screen ] [ flex align-middle ] [ bg-background ]">
+
+
+  <section class="[ section__central-overlayed gradient-bg ] [  max-w-screen-sm flex-grow ]" aria-label="login or register">
+
+
+    <h1 class="[ heading__main ] [ text-center ]">Bucle</h1>
+
+
+    <div>
+
+
+      <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+
+
+        <!-- username -->
+        <div class="[ my-4 ]">
+          <input class="[ w-full ]  [ border-0 rounded-md ]" type="text" placeholder="email" required name="email" formControlName="email" />
+          <div *ngIf="(loginForm.get('email').dirty || message)">
+            <div *ngIf="loginForm.get('email').errors?.email">Invalid email</div>
+            <div *ngIf="loginForm.get('email').errors?.required">Email is required</div>
+          </div>
+        </div>
+
+
+        <!-- password -->
+        <div class="[ my-4 ]">
+          <input class="[ w-full ] [ border-0 rounded-md ]" type="password" placeholder="Password" required name="password" formControlName="password" />
+          <div *ngIf="(loginForm.get('password').dirty || message)">
+            <div *ngIf="loginForm.get('password').errors?.required">Password is required</div>
+          </div>
+        </div>
+
+
+        <p class="[ mb-3 ]">{{ message }}</p>
+
+
+        <div class="[ flex ]">
+          <button class="[ btn__text-color ] [ w-1/3 mr-1 ]" type="submit" (click)="action='register'">Sign up</button>
+          <button class="[ btn__text-color ] [ flex-grow ]" type="submit" (click)="action='login'">Login</button>
+        </div>
+
+
+      </form>
+
+
     </div>
-    <div class="password">
-      <input type="password" placeholder="Password" required name="password" formControlName="password" />
-      <div *ngIf="
-          (loginForm.get('password').dirty || message) &&
-          loginForm.get('password').invalid
-        ">
-        Password is required
-      </div>
-    </div>
-    <p>{{ message }}</p>
-    <button type="submit" (click)="action='login'">Login</button>
-    <button type="submit" (click)="action='register'">Register</button>
-  </form>
-</div>
+  </section>
+
+
+</main>

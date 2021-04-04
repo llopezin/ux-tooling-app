@@ -1,4 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+ body{
+    @apply font-body text-text;
+} 
+
+/* Headings */
+.heading__main{
+    @apply text-5xl font-bold;
+}
+
+
+/* Sections */
+.section__full-screen{
+    @apply min-h-screen overflow-hidden;
+}
+
+.section__central-overlayed{
+     @apply m-auto p-14 rounded-lg shadow-2xl;
+}
+
+/* Buttons */
+.btn__text-color{
+    @apply  p-2 bg-text hover:bg-opacity-90 text-white rounded-md shadow-md;
+}
+
+
+/* Components */
+
+
+
+
+/*Backgrounds*/
+.gradient-bg{
+    @apply bg-gradient-to-r from-primary to-primary-light;
+}
