@@ -29,7 +29,7 @@ export class LoginComponent {
   onSubmit() {
     const passwordHasValidLength = this.loginForm.get('password').errors?.minlength === undefined
 
-
+    //Show invalid password length message only if user is signing up
     if (!passwordHasValidLength) {
       this.message = this.action === 'register' ? "Password is too short" : "Invalid Credentials"
       return
@@ -37,8 +37,8 @@ export class LoginComponent {
 
     this.message = ""
 
-    /*  if(this.action === 'login') this.login();
-     if(this.action === 'register') this.register() */
+    if (this.action === 'login') this.login();
+    if (this.action === 'register') this.register()
   }
 
   login() {
