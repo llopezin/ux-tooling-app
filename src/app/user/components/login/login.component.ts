@@ -1,22 +1,38 @@
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { UserService } from "../../services/user.service";
 import { Login } from "../../models/login";
 import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { User } from "../../models/user";
+import { login, register } from "../../../shared/store/user-store/user.actions"
+
 
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.css"],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   public message = "";
   public loginForm: FormGroup;
   public action;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private router: Router,
+    private store: Store<{ user: any }>
+  ) {
     this.createForm();
+  }
+
+  ngOnInit(): void {
+    this.store.select('user').subscribe(res => { 
+      console.log('res:', res)
+      if(res.userIsLoggedIn) this.router.navigate(['campaigns']) 
+     })
   }
 
   createForm() {
@@ -42,24 +58,14 @@ export class LoginComponent {
   }
 
   login() {
-    const login: Login = this.loginForm.value;
-    this.userService.login(login).subscribe(
-      (resp) => {
-        //this.message = resp.msg;
-        this.message = "Logged in";
-        this.router.navigate(["campaigns"])
-      },
-      (err) => {
-        //this.message = err.error.msg;
-        this.message = "Log in error";
-      }
-    );
+    const userDetails: Login = this.loginForm.value;
+    this.store.dispatch(login({ userDetails: userDetails }))
   }
 
   register() {
     const register: Login = this.loginForm.value;
     this.userService.register(register).subscribe(
-      (response) => {
+      (res) => {
         this.message = "Successfully registered";
       },
       (err) => {

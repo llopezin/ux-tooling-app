@@ -1,16 +1,16 @@
-import { state } from '@angular/animations';
 import { createReducer, on } from '@ngrx/store';
 import { User } from 'src/app/user/models/user';
-import { login, register } from './user.actions';
+import { login, loginSuccess, loginError, register } from './user.actions';
 
 export interface UsersState {
-    user?: User;
+    userIsLoggedIn?: boolean;
     loading: boolean;
     loaded: boolean;
     error: any;
   }
   
   export const initialState: UsersState = {
+    userIsLoggedIn: false,
     loading: false,
     loaded: false,
     error: null,
@@ -18,9 +18,32 @@ export interface UsersState {
 
 const _userReducer = createReducer(
     initialState,
-    on(login, (state) => ({...state, user: {email: "test@test.com", campaigns:["0"]}}))
+
+    on(login, (state) => ({ ...state, loading: true })),
+
+    on(loginSuccess, (state) => {
+      return {
+        ...state,
+        userIsLoggedIn: true,
+        loading: false,
+        loaded: true,
+      };
+    }),
+
+    on(loginError, (state, { payload }) => ({
+      ...state,
+      userIsLoggedIn: false,
+      loading: false,
+      loaded: false,
+      error: {
+        url: payload.url,
+        status: payload.status,
+        message: payload.message,
+      },
+    })),
+   
 )
 
-export default function userReducer(state, action){
-    _userReducer(state, action)
+export function userReducer(state, action) {
+  return _userReducer(state, action);
 }
