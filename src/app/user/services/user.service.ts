@@ -16,14 +16,13 @@ export class UserService {
   constructor(private http: HttpClient, private userStore: UserStoreService) { }
 
   login(user: Login): Observable<any> {
-    console.log('login @userService called')
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(this.loginRoute, user, { headers }).pipe(
       map((res: any) => {
         this.userStore.token = res.access_token; //Save token to local storage
         return res;
       })
-    );
+    ); 
   }
 
   register(user: Login): Observable<any> {
@@ -35,7 +34,13 @@ export class UserService {
     const token = this.userStore.token;
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
-    return this.http.get(`${this.API_ENDPOINT}/profile`, { headers });
+    return this.http.get(`${this.API_ENDPOINT}/profile`, { headers }).pipe(
+      map((res: any) => {
+        console.log('res:', res)
+        this.userStore.workspace = res.workspace_id; //Save workspace to local storage
+        return res;
+      })
+    ); ;
   }
 
 }

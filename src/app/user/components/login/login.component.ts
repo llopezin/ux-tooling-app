@@ -32,6 +32,8 @@ export class LoginComponent implements OnInit {
     this.store.select('user').subscribe(res => { 
       console.log('res:', res)
       if(res.userIsLoggedIn) this.router.navigate(['campaigns']) 
+      if(res.error) this.message = "Invalid credentials";
+
      })
   }
 
@@ -42,7 +44,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit() {    
     const passwordHasValidLength = this.loginForm.get('password').errors?.minlength === undefined
 
     //Show invalid password length message only if user is signing up
@@ -58,6 +60,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.message = ""
     const userDetails: Login = this.loginForm.value;
     this.store.dispatch(login({ userDetails: userDetails }))
   }

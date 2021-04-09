@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { UserStoreService } from './shared/services/user-store.service';
 import { User } from './user/models/user';
 
 @Component({
@@ -7,15 +8,29 @@ import { User } from './user/models/user';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'ux-tooling-app';
 
+  public userIsStored: boolean;
+  public userhasLoggedIn: boolean;
   public userIsLoggedIn: boolean;
 
-  constructor(private store: Store<{ user: any }>
+  constructor(private userStoreService: UserStoreService, private store: Store<{ user: any }>
   ) { }
 
   ngOnInit(): void {
-    this.store.select('user').subscribe(res => { this.userIsLoggedIn = res.userIsLoggedIn })
+    this.checkLocalForLoginToken()
+    this.subcribeToLoginChanges()
+    this.userIsLoggedIn = this.userIsStored || this.userhasLoggedIn
+  }
+
+  checkLocalForLoginToken() {
+    this.userIsStored = this.userStoreService.isLoggedIn()
+  }
+
+  subcribeToLoginChanges() {
+    this.store.select('user').subscribe((res)=>{
+      this.userhasLoggedIn = res.userIsLoggedIn
+    })
   }
 }

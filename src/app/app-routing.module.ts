@@ -4,7 +4,7 @@ import { CampaignsComponent } from './campaigns/campaigns.component';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
 
 
-const routes: Routes = [{ path: "", redirectTo: "/campaigns", pathMatch: "full" },
+const routes: Routes = [{ path: "", redirectTo: "/user/login", pathMatch: "full" },
 { path: "campaigns", component: CampaignsComponent, canActivate: [AuthGuardService], },
 {
   path: "user",
