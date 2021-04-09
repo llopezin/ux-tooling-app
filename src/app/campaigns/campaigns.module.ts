@@ -5,14 +5,15 @@ import { CampaignsListComponent } from './components/campaigns-list/campaigns-li
 import { CampaignsService } from './services/campaigns.service';
 import { CreateCampaignComponent } from './components/create-campaign/create-campaign.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { CampaignsRoutingModule } from './campaigns-routing.module';
 
 
 
 @NgModule({
   imports: [
-    CommonModule, FormsModule, ReactiveFormsModule
+    CommonModule, FormsModule, ReactiveFormsModule, CampaignsRoutingModule
   ],
-  providers: [CampaignsService],
+  providers: [],
   declarations: [CampaignsComponent, CampaignsListComponent, CreateCampaignComponent],
 })
 export class CampaignsModule { }

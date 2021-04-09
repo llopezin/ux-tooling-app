@@ -27,7 +27,7 @@ export class UserStoreService {
   }
 
   get workspace() {
-    return this.workspace;
+    return this._workspace;
   }
 
   isLoggedIn() {

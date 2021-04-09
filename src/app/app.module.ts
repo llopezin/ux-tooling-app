@@ -14,6 +14,7 @@ import { userReducer } from './shared/store/user-store/user.reducer';
 import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { UsersEffects } from './shared/store/user-store/user.effects';
+import { CampaignsModule } from './campaigns/campaigns.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { UsersEffects } from './shared/store/user-store/user.effects';
     BrowserModule,
     AppRoutingModule,
     UserModule, 
+    CampaignsModule,
     HttpClientModule, 
     StoreModule.forRoot({ user: userReducer }),
     StoreDevtoolsModule.instrument({

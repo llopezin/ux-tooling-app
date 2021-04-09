@@ -16,7 +16,7 @@ export class CreateCampaignComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
+  } 
 
   createForm() {
     this.newCampaignForm = this.fb.group({
@@ -25,7 +25,10 @@ export class CreateCampaignComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.newCampaignForm.value);
-    this.campaignService.create()
+   const nameObj = this.newCampaignForm.value;
+    this.campaignService.create(nameObj).subscribe((res)=>{
+      console.log(res);
+      
+    })
   }
 }

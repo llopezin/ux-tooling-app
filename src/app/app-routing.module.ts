@@ -5,7 +5,9 @@ import { AuthGuardService } from './shared/guards/auth-guard.service';
 
 
 const routes: Routes = [{ path: "", redirectTo: "/user/login", pathMatch: "full" },
-{ path: "campaigns", component: CampaignsComponent, canActivate: [AuthGuardService], },
+{ path: "campaigns",
+loadChildren: () => import("./campaigns/campaigns.module").then((m) => m.CampaignsModule),
+},
 {
   path: "user",
   loadChildren: () => import("./user/user.module").then((m) => m.UserModule),

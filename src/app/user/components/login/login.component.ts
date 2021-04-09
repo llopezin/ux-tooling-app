@@ -5,8 +5,8 @@ import { UserService } from "../../services/user.service";
 import { Login } from "../../models/login";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { User } from "../../models/user";
 import { login, register } from "../../../shared/store/user-store/user.actions"
+import { UserStoreService } from "src/app/shared/services/user-store.service";
 
 
 @Component({
@@ -23,18 +23,23 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private store: Store<{ user: any }>
+    private store: Store<{ user: any }>,
+    private userStoreService: UserStoreService
   ) {
     this.createForm();
   }
 
   ngOnInit(): void {
-    this.store.select('user').subscribe(res => { 
-      console.log('res:', res)
-      if(res.userIsLoggedIn) this.router.navigate(['campaigns']) 
-      if(res.error) this.message = "Invalid credentials";
+    if(this.userStoreService.token) this.navigateToCampaigns()
 
+    this.store.select('user').subscribe(res => { 
+      if(res.userIsLoggedIn) this.navigateToCampaigns()
+      if(res.error) this.message = "Invalid credentials";
      })
+  }
+
+  navigateToCampaigns(){
+    this.router.navigate(['campaigns']) 
   }
 
   createForm() {

@@ -9,21 +9,22 @@ import { Login } from 'src/app/user/models/login';
   providedIn: 'root'
 })
 export class CampaignsService {
+  private workspace_id = this.userStore.workspace
   private API_ENDPOINT = "/api"; //add endpoint here when api is deployed
-  private loginRoute = `${this.API_ENDPOINT}/auth/login`; 
-  private registerRoute = `${this.API_ENDPOINT}/register`; 
+  private workspaceEndpoint = `${this.API_ENDPOINT}/workspace/${this.workspace_id}`; 
+  private newCampaignEndpoint = `${this.API_ENDPOINT}/workspace/new-campaign/${this.workspace_id}`; 
+  private token = this.userStore.token;
+  
   constructor(private http: HttpClient, private userStore: UserStoreService) { }
-
-
-  create() {
-    const token = this.userStore.token;
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-
-    return this.http.post(this.loginRoute, name, { headers }).pipe(
-      map((res: any) => {
-        this.userStore.token = res.access_token; //Save token to local storage
-        return res;
-      })
-    );
+  
+  
+  getWorkspace(){
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
+    return this.http.get(this.workspaceEndpoint, {headers})
+  }
+  
+  create(name: {name: String}) {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
+    return this.http.post(this.newCampaignEndpoint, name, {headers} );
   }
 }
