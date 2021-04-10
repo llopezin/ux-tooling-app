@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { AppState } from './app.reducers';
 import { UserStoreService } from './shared/services/user-store.service';
 import { browserTokenLogin } from './shared/store/user-store/user.actions';
 import { User } from './user/models/user';
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit {
   public userhasLoggedIn: boolean;
   public userIsLoggedIn: boolean;
 
-  constructor(private userStoreService: UserStoreService, private store: Store<{ user: any }>
+  constructor(private userStoreService: UserStoreService, private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {
@@ -31,7 +32,8 @@ export class AppComponent implements OnInit {
   }
 
   subcribeToLoginChanges() {
-    this.store.select('user').subscribe((res)=>{
+    this.store
+    .select('usersApp').subscribe((res)=>{
       this.userhasLoggedIn = res.userIsLoggedIn
     })
   }

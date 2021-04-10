@@ -10,11 +10,12 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 
-import { userReducer } from './shared/store/user-store/user.reducer';
 import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { UsersEffects } from './shared/store/user-store/user.effects';
-import { CampaignsModule } from './campaigns/campaigns.module';
+import { WorkspaceModule } from './workspace/workspace.module';
+import { appReducers } from './app.reducers';
+import {WorkspaceEffects} from './shared/store/workspace-store/workspace.effects';
 
 @NgModule({
   declarations: [
@@ -26,14 +27,19 @@ import { CampaignsModule } from './campaigns/campaigns.module';
     BrowserModule,
     AppRoutingModule,
     UserModule, 
-    CampaignsModule,
+    WorkspaceModule,
     HttpClientModule, 
-    StoreModule.forRoot({ user: userReducer }),
+    StoreModule.forRoot(appReducers, {
+      runtimeChecks: {
+        strictStateImmutability: false,
+        strictActionImmutability: false,
+      },
+    }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
-    EffectsModule.forRoot([UsersEffects]), 
+    EffectsModule.forRoot([UsersEffects, WorkspaceEffects]), 
   ],
   providers: [],
   bootstrap: [AppComponent]

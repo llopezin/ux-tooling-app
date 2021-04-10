@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CampaignsComponent } from './campaigns.component';
+import { WorkspaceComponent } from './workspace.component';
 import { CampaignsListComponent } from './components/campaigns-list/campaigns-list.component';
-import { CampaignsService } from './services/campaigns.service';
+import { WorkspaceService } from './services/workspace.service';
 import { CreateCampaignComponent } from './components/create-campaign/create-campaign.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { CampaignsRoutingModule } from './campaigns-routing.module';
+import { WorkspaceRoutingModule } from './workspace-routing.module';
 
 
 
 @NgModule({
   imports: [
-    CommonModule, FormsModule, ReactiveFormsModule, CampaignsRoutingModule
+    CommonModule, FormsModule, ReactiveFormsModule, WorkspaceRoutingModule
   ],
   providers: [],
-  declarations: [CampaignsComponent, CampaignsListComponent, CreateCampaignComponent],
+  declarations: [WorkspaceComponent, CampaignsListComponent, CreateCampaignComponent],
 })
-export class CampaignsModule { }
+export class WorkspaceModule { }

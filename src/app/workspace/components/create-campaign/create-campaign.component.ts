@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { CampaignsService } from '../../services/campaigns.service';
+import { WorkspaceService } from '../../services/workspace.service';
 
 @Component({
   selector: 'app-create-campaign',
@@ -11,7 +11,7 @@ export class CreateCampaignComponent implements OnInit {
 
   public newCampaignForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private campaignService: CampaignsService) { 
+  constructor(private fb: FormBuilder, private campaignService: WorkspaceService) { 
   this.createForm()
   }
 

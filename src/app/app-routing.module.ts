@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CampaignsComponent } from './campaigns/campaigns.component';
+import { WorkspaceComponent } from './workspace/workspace.component';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
 
 
 const routes: Routes = [{ path: "", redirectTo: "/user/login", pathMatch: "full" },
 { path: "campaigns",
-loadChildren: () => import("./campaigns/campaigns.module").then((m) => m.CampaignsModule),
+loadChildren: () => import("./workspace/workspace.module").then((m) => m.WorkspaceModule),
 },
 {
   path: "user",
