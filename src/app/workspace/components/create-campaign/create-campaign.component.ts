@@ -26,9 +26,7 @@ export class CreateCampaignComponent implements OnInit {
 
   onSubmit(){
    const nameObj = this.newCampaignForm.value;
-    this.campaignService.create(nameObj).subscribe((res)=>{
-      console.log(res);
-      
+    this.campaignService.create(nameObj).subscribe((res)=>{    
     })
   }
 }

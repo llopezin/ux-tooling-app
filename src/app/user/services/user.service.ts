@@ -36,7 +36,6 @@ export class UserService {
 
     return this.http.get(`${this.API_ENDPOINT}/profile`, { headers }).pipe(
       map((res: any) => {
-        console.log('res:', res)
         this.userStore.workspace = res.workspace_id; //Save workspace to local storage
         return res;
       })

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserStoreService } from 'src/app/shared/services/user-store.service';
 import { Login } from 'src/app/user/models/login';
+import { Campaign } from '../models/campaign.model';
 import { Workspace } from '../models/workspace.model';
 
 @Injectable({
@@ -14,6 +15,7 @@ export class WorkspaceService {
   private API_ENDPOINT = "/api"; //add endpoint here when api is deployed
   private workspaceEndpoint = `${this.API_ENDPOINT}/workspace/${this.workspace_id}`; 
   private newCampaignEndpoint = `${this.API_ENDPOINT}/workspace/new-campaign/${this.workspace_id}`; 
+  private campaignsEndpoint = `${this.API_ENDPOINT}/campaigns/find`; 
   private token = this.userStore.token;
   
   constructor(private http: HttpClient, private userStore: UserStoreService) { }
@@ -27,5 +29,10 @@ export class WorkspaceService {
   create(name: {name: String}) {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
     return this.http.post(this.newCampaignEndpoint, name, {headers} );
+  }
+
+  getCampaigns(campaign_ids): Observable<Campaign[]>{
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
+    return this.http.post<Campaign[]>(this.campaignsEndpoint, campaign_ids, {headers})
   }
 }
