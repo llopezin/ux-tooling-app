@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserStoreService } from './shared/services/user-store.service';
+import { browserTokenLogin } from './shared/store/user-store/user.actions';
 import { User } from './user/models/user';
 
 @Component({
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkLocalForLoginToken()
+    if(this.userIsStored){this.store.dispatch(browserTokenLogin())}
     this.subcribeToLoginChanges()
     this.userIsLoggedIn = this.userIsStored || this.userhasLoggedIn
   }

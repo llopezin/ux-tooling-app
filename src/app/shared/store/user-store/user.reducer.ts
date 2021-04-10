@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { User } from 'src/app/user/models/user';
-import { login, loginSuccess, loginError, register } from './user.actions';
+import { login, loginSuccess, loginError, browserTokenLogin } from './user.actions';
 
 export interface UsersState {
     userIsLoggedIn?: boolean;
@@ -20,15 +20,20 @@ const _userReducer = createReducer(
     initialState,
 
     on(login, (state) => ({ ...state, loading: true })),
-
-    on(loginSuccess, (state) => {
-      return {
+    
+    on(browserTokenLogin, (state) => ({
+      ...state,
+      userIsLoggedIn: true,
+      loading: false,
+      loaded: true
+  })),
+    
+    on(loginSuccess, (state) => ({
         ...state,
         userIsLoggedIn: true,
         loading: false,
-        loaded: true,
-      };
-    }),
+        loaded: true
+    })),
 
     on(loginError, (state, { payload }) => ({
       ...state,

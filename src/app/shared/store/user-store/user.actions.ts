@@ -8,6 +8,10 @@ export const login = createAction(
     props<{ userDetails: Login }>()
 );
 
+export const browserTokenLogin = createAction(
+    '[User] browser token login',
+);
+
 export const loginSuccess = createAction(
     '[User] Login success',
     props<{ user: User }>()
