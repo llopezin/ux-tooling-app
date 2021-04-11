@@ -17,7 +17,7 @@ export const getWorkspaceError = createAction(
     props<{ payload: any }>()
 );
 
-//campaigns
+//get campaigns
 export const getCampaigns = createAction(
     '[Workspace] get campaigns',
     props<{ campaign_ids: string[] }>()
@@ -25,13 +25,30 @@ export const getCampaigns = createAction(
 
 export const getCampaignsSuccess = createAction(
     '[Workspace] get campaigns success',
-    props<{ camapigns: Campaign[] }>()
+    props<{ campaigns: Campaign[] }>()
 );
 
 export const getCampaignsError = createAction(
     '[Workspace] get campaigns Error',
     props<{ payload: any }>()
 );
+
+//create campaigns
+export const createCampaign = createAction(
+    '[Workspace] create campaigns',
+    props<{ name: string }>()
+);
+
+export const createCampaignSuccess = createAction(
+    '[Workspace] create campaigns success',
+    props<{ camapign: Campaign }>()
+);
+
+export const createCampaignError = createAction(
+    '[Workspace] create campaigns Error',
+    props<{ payload: any }>()
+);
+
 
 
 

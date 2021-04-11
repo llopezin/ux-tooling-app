@@ -33,8 +33,9 @@ export class LoginComponent implements OnInit {
     if(this.userStoreService.token) this.navigateToCampaigns()
 
     this.store.select('user').subscribe(res => { 
-      if(res.userIsLoggedIn) this.navigateToCampaigns()
-      if(res.error) this.message = "Invalid credentials";
+      console.log('res:', res)
+      if(res?.userIsLoggedIn) this.navigateToCampaigns()
+      if(res?.error) this.message = "Invalid credentials";
      })
   }
 
