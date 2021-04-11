@@ -36,12 +36,12 @@ export const getCampaignsError = createAction(
 //create campaigns
 export const createCampaign = createAction(
     '[Workspace] create campaigns',
-    props<{ name: string }>()
+    props<{ name: {name: String} }>()
 );
 
 export const createCampaignSuccess = createAction(
     '[Workspace] create campaigns success',
-    props<{ camapign: Campaign }>()
+    props<{ campaign: Campaign }>()
 );
 
 export const createCampaignError = createAction(

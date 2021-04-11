@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { WorkspaceService } from 'src/app/workspace/services/workspace.service';
-import { getCampaigns, getCampaignsError, getCampaignsSuccess, getWorkspace, getWorkspaceError, getWorkspaceSuccess } from './workspace.actions';
+import { createCampaign, createCampaignError, createCampaignSuccess, getCampaigns, getCampaignsError, getCampaignsSuccess, getWorkspace, getWorkspaceError, getWorkspaceSuccess } from './workspace.actions';
 
 @Injectable()
 export class WorkspaceEffects {
@@ -31,4 +31,16 @@ export class WorkspaceEffects {
       )
     )
   )
+
+  createCampaign$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(createCampaign),
+    mergeMap((action) =>
+      this.workspaceService.create(action.name).pipe(
+        map((campaign) => createCampaignSuccess({ campaign: campaign })),
+        catchError((err) => of(createCampaignError({ payload: err })))
+      )
+    )
+  )
+)
 }

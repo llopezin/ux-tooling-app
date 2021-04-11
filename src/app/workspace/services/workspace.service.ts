@@ -20,15 +20,14 @@ export class WorkspaceService {
   
   constructor(private http: HttpClient, private userStore: UserStoreService) { }
   
-  
   getWorkspace(): Observable<Workspace>{
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
     return this.http.get<Workspace>(this.workspaceEndpoint, {headers})
   }
   
-  create(name: {name: String}) {
+  create(name: {name: String}): Observable<Campaign> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
-    return this.http.post(this.newCampaignEndpoint, name, {headers} );
+    return this.http.post<Campaign>(this.newCampaignEndpoint, name, {headers} );
   }
 
   getCampaigns(campaign_ids): Observable<Campaign[]>{

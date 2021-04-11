@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Campaign } from 'src/app/workspace/models/campaign.model';
-import { getWorkspace, getWorkspaceSuccess, getWorkspaceError, getCampaigns, getCampaignsSuccess, getCampaignsError } from './workspace.actions';
+import { getWorkspace, getWorkspaceSuccess, getWorkspaceError, getCampaigns, getCampaignsSuccess, getCampaignsError, createCampaign, createCampaignSuccess, createCampaignError } from './workspace.actions';
 
 export interface WorkspaceState {
   workspace?: {
@@ -56,7 +56,7 @@ const _workspaceReducer = createReducer(
 
     let newState = {
       ...state,
-      workspace: {...state.workspace, campaigns: campaigns},
+      workspace: { ...state.workspace, campaigns: campaigns },
       loading: false,
       loaded: true
     }
@@ -64,6 +64,32 @@ const _workspaceReducer = createReducer(
   }),
 
   on(getCampaignsError, (state, { payload }) => ({
+    ...state,
+    userIsLoggedIn: false,
+    loading: false,
+    loaded: false,
+    error: {
+      url: payload.url,
+      status: payload.status,
+      message: payload.message,
+    },
+  })),
+
+  //Create campaign
+  on(createCampaign, (state) => ({ ...state, loading: true })),
+
+  on(createCampaignSuccess, (state, { campaign }) => {
+
+    let newState = {
+      ...state,
+      workspace: { ...state.workspace, campaigns: [...state.workspace.campaigns, campaign] },
+      loading: false,
+      loaded: true
+    }
+    return newState
+  }),
+
+  on(createCampaignError, (state, { payload }) => ({
     ...state,
     userIsLoggedIn: false,
     loading: false,
