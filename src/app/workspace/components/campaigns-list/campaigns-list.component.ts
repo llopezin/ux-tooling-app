@@ -22,7 +22,7 @@ export class CampaignsListComponent implements OnInit {
   ngOnInit(): void {
     this.store.select('workspaceApp').subscribe(( {workspace} ) => {
       this.getCampaigns(workspace)
-      this.campaigns = workspace?.campaigns
+      this.campaigns = workspace?.campaigns?.reverse()
     })
   }
 

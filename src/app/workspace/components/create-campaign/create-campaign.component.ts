@@ -13,6 +13,7 @@ import { WorkspaceService } from '../../services/workspace.service';
 export class CreateCampaignComponent implements OnInit {
 
   public newCampaignForm: FormGroup;
+  public formOpened = false;
 
   constructor(private fb: FormBuilder, private store: Store<AppState>) { 
   this.createForm()
@@ -30,5 +31,6 @@ export class CreateCampaignComponent implements OnInit {
   onSubmit(){
    const nameObj: {name:String} = this.newCampaignForm.value;
     this.store.dispatch(createCampaign({name: nameObj}))
+    this.formOpened = false
   }
 }

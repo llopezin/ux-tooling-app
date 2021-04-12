@@ -1,4 +1,6 @@
 
 <app-header *ngIf="userIsLoggedIn"></app-header>
-<router-outlet></router-outlet>
-<app-footer *ngIf="userIsLoggedIn"></app-footer>
+<main class="[ min-h-full max-w-screen-lg mx-auto pt-8 ]">
+    <router-outlet></router-outlet>
+</main>
+<!-- <app-footer *ngIf="userIsLoggedIn"></app-footer> -->

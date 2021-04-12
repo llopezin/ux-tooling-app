@@ -1,4 +1,5 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="newCampaignForm">
+<button class="[ btn__primary-color ] [ -mt-8 ] [ float-right ]" (click)="formOpened = !formOpened" *ngIf="!formOpened">New campaign</button> 
+<form (ngSubmit)="onSubmit()" [formGroup]="newCampaignForm"  *ngIf="formOpened">
 
     <div class="[ my-4 ]">
         <input class="[ w-full ]  [ border-0 rounded-md ]" type="text" placeholder="campaign name" required name="name"
@@ -10,5 +11,4 @@
     <button type="submit">Create campaign</button>
 </form>
 
-<button>New campaign</button> 
 

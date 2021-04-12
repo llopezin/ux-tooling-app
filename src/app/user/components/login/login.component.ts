@@ -7,6 +7,7 @@ import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { login, register } from "../../../shared/store/user-store/user.actions"
 import { UserStoreService } from "src/app/shared/services/user-store.service";
+import { AppState } from "src/app/app.reducers";
 
 
 @Component({
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private store: Store<{ user: any }>,
+    private store: Store<AppState>,
     private userStoreService: UserStoreService
   ) {
     this.createForm();
@@ -32,9 +33,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if(this.userStoreService.token) this.navigateToCampaigns()
 
-    this.store.select('user').subscribe(res => { 
+    this.store.select('usersApp').subscribe(res => { 
       if(res?.userIsLoggedIn) this.navigateToCampaigns()
-      if(res?.error) this.message = "Invalid credentials";
+      if(res?.error) this.message = "Invalid credentials"; 
      })
   }
 

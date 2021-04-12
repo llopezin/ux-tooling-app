@@ -11,6 +11,10 @@
     @apply text-5xl font-bold;
 }
 
+.heading__secondary{
+    @apply text-2xl font-bold;
+}
+
 
 /* Sections */
 .section__full-screen{
@@ -26,6 +30,10 @@
     @apply  p-2 bg-text hover:bg-opacity-90 text-white rounded-md shadow-md;
 }
 
+.btn__primary-color{
+    @apply  p-2 bg-primary hover:bg-opacity-90 text-white rounded-md shadow-md;
+}
+
 
 /* Components */
 
@@ -35,4 +43,12 @@
 /*Backgrounds*/
 .gradient-bg{
     @apply bg-gradient-to-r from-primary to-primary-light;
+}
+
+
+/*Borders*/
+.gradient-border{
+    border-bottom: solid 3px;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to right, #fe9873, #ffc580);
 }
