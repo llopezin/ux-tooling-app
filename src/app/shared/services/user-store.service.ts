@@ -1,4 +1,7 @@
 import { Injectable } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { AppState } from "src/app/app.reducers";
+import { getWorkspace } from "../store/workspace-store/workspace.actions";
 
 @Injectable({
   providedIn: "root",
@@ -6,6 +9,7 @@ import { Injectable } from "@angular/core";
 export class UserStoreService {
   private _token: string = null;
   private _workspace: string = null;
+  private store: Store<AppState>
   
   constructor() {
     this._token = this.getTokenFromCookies() || null;

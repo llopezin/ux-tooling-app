@@ -22,21 +22,28 @@ export class CampaignComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
 
-      this.store.select('workspaceApp').subscribe(({workspace}) => {
-        /* const campaignsExist =  state?.workspace?.campaigns
-        campaignsExist ? this.getCampaignFromStore(state.workspace.campaigns) : this.getCampaign() */
-        if(workspace?.campaigns) this.getCampaignFromStore(workspace.campaigns)
-        if(!workspace){this.store.dispatch(getWorkspace())}
-        if(workspace && !workspace.campaigns){this.store.dispatch(getCampaigns({campaign_ids: workspace.campaign_ids}))}
-      })
+     
+
+      this.store.select('workspaceApp').subscribe((state) => {
+        const {workspace, loading} = state;
+
+       if(loading) return
+       if(workspace?.campaigns) this.getCampaignFromStore(workspace.campaigns)
+       if(!workspace){ this.getWorkspace()}
+       if(workspace && !workspace.campaigns){this.getCampaigns(workspace)}
+      }) 
     });
   }
 
-  getCampaign(){
+  getCampaignFromStore(campaigns){
+    this.campaign = campaigns.find(campaign=>{return campaign._id == this.id})
+  }
+
+  getWorkspace(){
     this.store.dispatch(getWorkspace())
   }
 
-  getCampaignFromStore(campaigns){
-    this.campaign = campaigns.find(campaign=>{campaign.id === this.id})
+  getCampaigns(workspace){
+    this.store.dispatch(getCampaigns({campaign_ids: workspace.campaign_ids}))
   }
 }
