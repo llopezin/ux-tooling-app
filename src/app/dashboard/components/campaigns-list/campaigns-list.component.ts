@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
 import { getCampaigns } from 'src/app/shared/store/workspace-store/workspace.actions';
 import { Campaign } from '../../models/campaign.model';
-import { WorkspaceService } from '../../services/workspace.service';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-campaigns-list',
@@ -16,18 +16,21 @@ export class CampaignsListComponent implements OnInit {
   public campaign_ids: string[];
 
   constructor(
-    private store: Store<AppState>,
-    private workspaceService: WorkspaceService) { }
+    private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    this.store.select('workspaceApp').subscribe(( {workspace} ) => {
+    this.subscribeToCampaignsStore()
+  }
+
+  subscribeToCampaignsStore() {
+    this.store.select('workspaceApp').subscribe(({ workspace }) => {
+      if (!workspace) return
       this.getCampaigns(workspace)
-      this.campaigns = workspace?.campaigns?.reverse()
+      this.campaigns = workspace?.campaigns
     })
   }
 
   getCampaigns(workspace) {
-    if (!workspace) return
     if (this.campaign_ids != workspace.campaign_ids) {
       this.campaign_ids = workspace.campaign_ids
       this.store.dispatch(getCampaigns({ campaign_ids: this.campaign_ids }))

@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-import { Campaign } from 'src/app/workspace/models/campaign.model';
+import { Campaign } from 'src/app/dashboard/models/campaign.model';
 import { getWorkspace, getWorkspaceSuccess, getWorkspaceError, getCampaigns, getCampaignsSuccess, getCampaignsError, createCampaign, createCampaignSuccess, createCampaignError } from './workspace.actions';
+
 
 export interface WorkspaceState {
   workspace?: {
@@ -56,7 +57,7 @@ const _workspaceReducer = createReducer(
 
     let newState = {
       ...state,
-      workspace: { ...state.workspace, campaigns: campaigns },
+      workspace: { ...state.workspace, campaigns: campaigns.reverse() },
       loading: false,
       loaded: true
     }

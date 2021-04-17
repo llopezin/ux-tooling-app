@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { WorkspaceComponent } from './workspace/workspace.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
 
 
 const routes: Routes = [{ path: "", redirectTo: "/user/login", pathMatch: "full" },
 { path: "campaigns",
-loadChildren: () => import("./workspace/workspace.module").then((m) => m.WorkspaceModule),
+loadChildren: () => import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
 },
 {
   path: "user",
   loadChildren: () => import("./user/user.module").then((m) => m.UserModule),
-}];
+},
+{ path: 'campaign/:id', loadChildren: () => import('./campaign/campaign.module').then(m => m.CampaignModule) }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

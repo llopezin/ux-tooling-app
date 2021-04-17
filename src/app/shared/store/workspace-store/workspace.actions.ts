@@ -1,19 +1,19 @@
 import { createAction, props } from '@ngrx/store';
-import { Workspace } from 'src/app/workspace/models/workspace.model';
-import { Campaign } from "../../../workspace/models/campaign.model"
+import { Workspace } from '../../models/workspace.model';
+import { Campaign } from "../../../dashboard/models/campaign.model"
 
-//workspace
+//Workspace
 export const getWorkspace = createAction(
     '[Workspace] get workspace'
 );
 
 export const getWorkspaceSuccess = createAction(
-    '[Workspace] get campaigns success',
+    '[Workspace] get workspace success',
     props<{ workspace: Workspace }>()
 );
 
 export const getWorkspaceError = createAction(
-    '[Workspace] get campaigns Error',
+    '[Workspace] get workspace Error',
     props<{ payload: any }>()
 );
 

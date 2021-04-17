@@ -5,12 +5,12 @@ import { map } from 'rxjs/operators';
 import { UserStoreService } from 'src/app/shared/services/user-store.service';
 import { Login } from 'src/app/user/models/login';
 import { Campaign } from '../models/campaign.model';
-import { Workspace } from '../models/workspace.model';
+import { Workspace } from '../../shared/models/workspace.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WorkspaceService {
+export class DashboardService {
   private API_ENDPOINT = "/api"; //add endpoint here when api is deployed
 
 

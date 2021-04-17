@@ -22,19 +22,19 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkLocalForLoginToken()
-    if(this.userIsStored){this.store.dispatch(browserTokenLogin())}
     this.subcribeToLoginChanges()
-    this.userIsLoggedIn = this.userIsStored || this.userhasLoggedIn
   }
 
   checkLocalForLoginToken() {
-    this.userIsStored = this.userStoreService.isLoggedIn()
+    if (this.userStoreService.isLoggedIn()) { 
+      this.store.dispatch(browserTokenLogin()) 
+    }
   }
 
   subcribeToLoginChanges() {
     this.store
-    .select('usersApp').subscribe((res)=>{
-      this.userhasLoggedIn = res.userIsLoggedIn
-    })
+      .select('usersApp').subscribe((res) => {
+        this.userIsLoggedIn = res.userIsLoggedIn
+      })
   }
 }

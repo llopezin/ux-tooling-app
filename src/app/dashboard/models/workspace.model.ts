@@ -1,6 +1,6 @@
 import { Campaign } from "./campaign.model";
 
-export interface Workspace {
+export interface Dashboard {
     id?: string,
     name?: string,
     admin_email: string,

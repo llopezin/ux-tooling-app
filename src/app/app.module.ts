@@ -13,7 +13,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { UsersEffects } from './shared/store/user-store/user.effects';
-import { WorkspaceModule } from './workspace/workspace.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 import { appReducers } from './app.reducers';
 import {WorkspaceEffects} from './shared/store/workspace-store/workspace.effects';
 
@@ -27,7 +27,7 @@ import {WorkspaceEffects} from './shared/store/workspace-store/workspace.effects
     BrowserModule,
     AppRoutingModule,
     UserModule, 
-    WorkspaceModule,
+    DashboardModule,
     HttpClientModule, 
     StoreModule.forRoot(appReducers, {
       runtimeChecks: {
