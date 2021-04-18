@@ -20,25 +20,25 @@ export class DashboardService {
     const workspace_id = this.userStore.workspace;
     const token = this.userStore.token;
     const workspaceEndpoint = `${this.API_ENDPOINT}/workspace/${workspace_id}`;
-
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    
     return this.http.get<Workspace>(workspaceEndpoint, { headers })
   }
 
-  create(name: { name: String }): Observable<Campaign> {
+  create(name: { name: String }): Observable<Workspace> {
     const workspace_id = this.userStore.workspace;
     const token = this.userStore.token;
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-
     const newCampaignEndpoint = `${this.API_ENDPOINT}/workspace/new-campaign/${workspace_id}`;
-    return this.http.post<Campaign>(newCampaignEndpoint, name, { headers });
+    
+    return this.http.post<Workspace>(newCampaignEndpoint, name, { headers });    
   }
 
   getCampaigns(campaign_ids): Observable<Campaign[]> {
     const campaignsEndpoint = `${this.API_ENDPOINT}/campaigns/find`;
     const token = this.userStore.token;
-    
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    
     return this.http.post<Campaign[]>(campaignsEndpoint, campaign_ids, { headers })
   }
 }

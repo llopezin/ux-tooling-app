@@ -41,7 +41,7 @@ export const createCampaign = createAction(
 
 export const createCampaignSuccess = createAction(
     '[Workspace] create campaigns success',
-    props<{ campaign: Campaign }>()
+    props<{ campaign_id: string }>()
 );
 
 export const createCampaignError = createAction(

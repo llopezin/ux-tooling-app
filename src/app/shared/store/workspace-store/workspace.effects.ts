@@ -33,14 +33,14 @@ export class WorkspaceEffects {
   )
 
   createCampaign$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(createCampaign),
-    mergeMap((action) =>
-      this.dashboardService.create(action.name).pipe(
-        map((campaign) => createCampaignSuccess({ campaign: campaign })),
-        catchError((err) => of(createCampaignError({ payload: err })))
+    this.actions$.pipe(
+      ofType(createCampaign),
+      mergeMap((action) =>
+        this.dashboardService.create(action.name).pipe(
+          map((workspace) => createCampaignSuccess({ campaign_id: workspace.campaign_ids.pop() })),
+          catchError((err) => of(createCampaignError({ payload: err })))
+        )
       )
     )
   )
-)
 }

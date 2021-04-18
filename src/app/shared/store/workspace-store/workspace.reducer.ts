@@ -79,11 +79,10 @@ const _workspaceReducer = createReducer(
   //Create campaign
   on(createCampaign, (state) => ({ ...state, loading: true })),
 
-  on(createCampaignSuccess, (state, { campaign }) => {
-
+  on(createCampaignSuccess, (state, { campaign_id }) => {
     let newState = {
       ...state,
-      workspace: { ...state.workspace, campaigns: [...state.workspace.campaigns, campaign] },
+      workspace: { ...state.workspace, campaign_ids: [...state.workspace.campaign_ids, campaign_id]},
       loading: false,
       loaded: true
     }

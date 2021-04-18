@@ -32,7 +32,7 @@ module.exports = {
         },
 
         fontFamily: {
-          'body': ['"Exo 2"', 'monospace'],
+          'body': ['monospace'],
          },
          
          gradientColorStops: theme => ({
