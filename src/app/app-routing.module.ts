@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthGuardService } from './shared/guards/auth-guard.service';
 
 
 const routes: Routes = [{ path: "", redirectTo: "/user/login", pathMatch: "full" },
@@ -12,7 +10,8 @@ loadChildren: () => import("./dashboard/dashboard.module").then((m) => m.Dashboa
   path: "user",
   loadChildren: () => import("./user/user.module").then((m) => m.UserModule),
 },
-{ path: 'campaign/:id', loadChildren: () => import('./campaign/campaign.module').then(m => m.CampaignModule) }];
+{ path: 'campaign/:id', loadChildren: () => import('./campaign/campaign.module').then(m => m.CampaignModule) },
+{ path: 'campaign/:id/new-task', loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksModule) }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

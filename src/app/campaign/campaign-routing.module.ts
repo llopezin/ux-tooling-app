@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardService } from '../shared/guards/auth-guard.service';
 import { CampaignComponent } from './campaign.component';
 
-const routes: Routes = [{ path: '', component: CampaignComponent, canActivate: [AuthGuardService] }];
+const routes: Routes = [{
+   path: '', component: CampaignComponent, canActivate: [AuthGuardService] }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
