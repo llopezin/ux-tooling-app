@@ -35,10 +35,10 @@
 }
 
 
-/* Components */
-
-
-
+/* Inputs */
+.input__primary {
+    @apply w-full border-0 rounded-md border-b border-primary ;
+}
 
 /*Backgrounds*/
 .gradient-bg{

@@ -12,7 +12,6 @@ import {createCampaign} from 'src/app/shared/store/workspace-store/workspace.act
 export class CreateTaskComponent implements OnInit {
 
   public newTaskForm: FormGroup;
-  public formOpened = false;
 
   constructor(private fb: FormBuilder, private store: Store<AppState>) {
     this.createForm()
@@ -24,15 +23,16 @@ export class CreateTaskComponent implements OnInit {
   createForm() {
     this.newTaskForm = this.fb.group({
       name: ["", [Validators.required]],
+      type: ["Survey", [Validators.required]],
     });
   }
 
   onSubmit() {
     if (!this.newTaskForm.valid) return;
-    const nameObj: { name: String } = this.newTaskForm.value;
+    const { name, type } = this.newTaskForm.value;
+    console.log('newTaskForm.value:', this.newTaskForm.value)
 
     //disatch action
-    this.formOpened = false
   }
 
 }

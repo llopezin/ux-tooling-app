@@ -5,17 +5,34 @@
     
     <form (ngSubmit)="onSubmit()" [formGroup]="newTaskForm">
     
+
         <div class="[ my-4 ]">
-            <input class="[ w-full ]  [ border-0 rounded-md ]" type="text" placeholder="task name" required name="name"
-                formControlName="name" />
+
+            <label for="task-name">Name</label>
+            <input class="[ input__primary ]" type="text" placeholder="task name" required name="name"
+                formControlName="name" id="task-name"/>
+
             <div *ngIf="(newTaskForm.get('name').dirty)">
                 <div *ngIf="newTaskForm.get('name').errors?.required">Name is required</div>
             </div>
+
+        </div>
+
+        <div class="[ my-4 ]">   
+
+            <label for="task-type">Type</label>      
+            <select  class="[ input__primary ]" placeholder="task name" required name="type"
+            formControlName="type" id="task-type">
+                <option value="Survey" selected>Survey</option>
+                <option value="Tree test">Tree test</option>
+                <option value="Card sorting">Card sorting</option>
+            </select>
+
         </div>
     
     
         <div class="[ flex justify-end ]">
-            <button class="[ btn__primary-color ]" type="submit">Create Task</button>
+            <button class="[ btn__primary-color ]" type="submit" (click)="onSubmit()">Create Task</button>
         </div>
     
     

@@ -15,7 +15,7 @@
 
         <!-- username -->
         <div class="[ my-4 ]">
-          <input class="[ w-full ]  [ border-0 rounded-md ]" type="text" placeholder="email" required name="email" formControlName="email" />
+          <input class="[ input__primary ]" type="text" placeholder="email" required name="email" formControlName="email" />
           <div *ngIf="(loginForm.get('email').dirty || message)">
             <div *ngIf="loginForm.get('email').errors?.email">Invalid email</div>
             <div *ngIf="loginForm.get('email').errors?.required">Email is required</div>
