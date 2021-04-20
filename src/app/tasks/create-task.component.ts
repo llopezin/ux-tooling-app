@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import {AppState} from 'src/app/app.reducers';
 import {createCampaign} from 'src/app/shared/store/workspace-store/workspace.actions';
@@ -12,8 +12,10 @@ import {createCampaign} from 'src/app/shared/store/workspace-store/workspace.act
 export class CreateTaskComponent implements OnInit {
 
   public newTaskForm: FormGroup;
+  public type: FormControl;
 
   constructor(private fb: FormBuilder, private store: Store<AppState>) {
+    this.type = new FormControl('Survey', [Validators.required]);
     this.createForm()
   }
 
@@ -23,7 +25,7 @@ export class CreateTaskComponent implements OnInit {
   createForm() {
     this.newTaskForm = this.fb.group({
       name: ["", [Validators.required]],
-      type: ["Survey", [Validators.required]],
+      type: this.type,
     });
   }
 

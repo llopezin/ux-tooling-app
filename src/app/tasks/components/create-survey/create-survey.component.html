@@ -1,1 +1,55 @@
-<p>create-survey works!</p>
+<h3 class="[ heading__secondary ]">Survey Questions</h3>
+
+<form (ngSubmit)="onSubmit()" [formGroup]="newSurveyForm">
+
+    <!--  
+    <div class="[ my-4 ]">
+
+        <label for="task-name">Question 1</label>
+        <input class="[ input__primary ]" type="text" placeholder="task name" required name="question"
+            formControlName="question" id="task-name" />
+
+        <div *ngIf="(newSurveyForm.get('question').dirty)">
+            <div *ngIf="newSurveyForm.get('question').errors?.required">Write a question</div>
+        </div>
+
+    </div>
+
+   <div class="[ my-4 ]">   
+
+        <label for="task-type">Type</label>      
+        <select  class="[ input__primary ]" required name="type"
+        formControlName="type" id="task-type">
+            <option value="Survey" selected>Survey</option>
+            <option value="Tree test">Tree test</option>
+            <option value="Card sorting">Card sorting</option>
+        </select>
+
+    </div> -->
+
+
+
+
+    <div formArrayName="questions">
+
+        <div *ngFor="let item of surveryQuestions.controls; let i=index" [formGroupName]="i">
+           
+            <div class="[ my-4 ]">
+
+                <label [for]="'question'+ i">Question {{i+1}}</label>
+                <input class="[ input__primary ]" type="text" placeholder="Write your question" required [name]="'question'+ i"
+                    [formControlName]="'question'" [id]="'question'+ i" />
+        
+            </div>
+
+            <button (click)="deleteQuestion(i)">Remove</button>
+
+        </div>
+
+    </div>
+
+    <button class="[ bg-text-color ]" (click)="addQuestion()">Add question</button>
+
+</form>
+
+{{ this.newSurveyForm.value | json }}

@@ -1,8 +1,11 @@
 <div class="[ max-w-screen-lg mx-auto pt-8 ]">
+
+
     <h2 class="[ heading__secondary ]">
         New Task
     </h2>
     
+
     <form (ngSubmit)="onSubmit()" [formGroup]="newTaskForm">
     
 
@@ -21,7 +24,7 @@
         <div class="[ my-4 ]">   
 
             <label for="task-type">Type</label>      
-            <select  class="[ input__primary ]" placeholder="task name" required name="type"
+            <select  class="[ input__primary ]" required name="type"
             formControlName="type" id="task-type">
                 <option value="Survey" selected>Survey</option>
                 <option value="Tree test">Tree test</option>
@@ -29,12 +32,21 @@
             </select>
 
         </div>
+
+        <div>
+
+            <app-create-survey *ngIf="type.value === 'Survey'"></app-create-survey>
+            <app-create-card-sorting *ngIf="type.value === 'Card sorting'"></app-create-card-sorting>
+            <app-create-tree-test *ngIf="type.value === 'Tree test'"></app-create-tree-test>
     
+        </div>    
     
-        <div class="[ flex justify-end ]">
-            <button class="[ btn__primary-color ]" type="submit" (click)="onSubmit()">Create Task</button>
+        <div class="[ flex justify-end w-full ]">
+            <button class="[ btn__primary-color w-full mt-10 ]" type="submit" (click)="onSubmit()">Create Task</button>
         </div>
     
     
     </form>
+
+
 </div>
