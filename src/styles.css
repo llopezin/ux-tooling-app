@@ -34,6 +34,10 @@
     @apply  p-2 bg-primary hover:bg-opacity-90 text-white rounded-md shadow-md;
 }
 
+.btn__primary-light{
+    @apply  p-2 bg-primary-light hover:bg-opacity-90 rounded-md shadow-md;
+}
+
 
 /* Inputs */
 .input__primary {

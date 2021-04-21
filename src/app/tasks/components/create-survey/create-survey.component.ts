@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
@@ -10,6 +10,7 @@ import { AppState } from 'src/app/app.reducers';
 })
 export class CreateSurveyComponent implements OnInit {
   public newSurveyForm: FormGroup;
+  @Output() createSurvey: EventEmitter<any> = new EventEmitter();
 
   constructor(private fb: FormBuilder, private store: Store<AppState>) {
   }
@@ -17,37 +18,52 @@ export class CreateSurveyComponent implements OnInit {
   ngOnInit(): void {
     this.createForm()
     console.log(this.surveryQuestions.controls);
-    
+
   }
 
   createForm() {
     this.newSurveyForm = this.fb.group({
-      questions: this.fb.array([this.newQuestion()])
+      questions: this.fb.array([this.newOptionsQuestion()])
     }
     );
   }
 
-  addQuestion(){
-    this.surveryQuestions.push(this.newQuestion())
+  addQuestion(type) {
+    switch (type) {
+      case 'options':
+        this.surveryQuestions.push(this.newOptionsQuestion())
+        break;
+
+      case 'likert':
+        this.surveryQuestions.push(this.newLikertScaleQuestion())
+        break;
+    }
   }
 
-  deleteQuestion(i){
+  deleteQuestion(i) {
     this.surveryQuestions.removeAt(i)
   }
 
-  newQuestion(): FormGroup {
+  newOptionsQuestion(): FormGroup {
     return this.fb.group({
       question: ["", [Validators.required]],
-      type: ['Question', [Validators.required]],
+      options: ["", [Validators.required]],
+      multipleChoice: [false, [Validators.required]],
+    });
+  }
+
+  newLikertScaleQuestion(): FormGroup {
+    return this.fb.group({
+      question: ["", [Validators.required]],
+      tags: ["", [Validators.required]]
     });
   }
 
   onSubmit() {
     if (!this.newSurveyForm.valid) return;
-    const { question, type } = this.newSurveyForm.value;
-    console.log('newSurveyForm.value:', this.newSurveyForm.value)
 
-    //dispatch action
+    const questions = this.newSurveyForm.value.questions
+    this.createSurvey.emit(questions)
   }
 
   get surveryQuestions() {

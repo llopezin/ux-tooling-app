@@ -37,4 +37,8 @@ export class CreateTaskComponent implements OnInit {
     //disatch action
   }
 
+  createSurvey(e){
+    console.log(e)
+  }
+
 }

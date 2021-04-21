@@ -35,16 +35,11 @@
 
         <div>
 
-            <app-create-survey *ngIf="type.value === 'Survey'"></app-create-survey>
+            <app-create-survey (createSurvey)="createSurvey($event)" *ngIf="type.value === 'Survey'"></app-create-survey>
             <app-create-card-sorting *ngIf="type.value === 'Card sorting'"></app-create-card-sorting>
             <app-create-tree-test *ngIf="type.value === 'Tree test'"></app-create-tree-test>
     
         </div>    
-    
-        <div class="[ flex justify-end w-full ]">
-            <button class="[ btn__primary-color w-full mt-10 ]" type="submit" (click)="onSubmit()">Create Task</button>
-        </div>
-    
     
     </form>
 
