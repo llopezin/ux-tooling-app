@@ -10,9 +10,11 @@ import { map } from "rxjs/operators";
 })
 
 export class UserService {
+  
   private API_ENDPOINT = "/api"; //add endpoint here when api is deployed
   private loginRoute = `${this.API_ENDPOINT}/auth/login`; 
   private registerRoute = `${this.API_ENDPOINT}/register`; 
+
   constructor(private http: HttpClient, private userStore: UserStoreService) { }
 
   login(user: Login): Observable<any> {

@@ -59,7 +59,7 @@
 
                 <div class="[ my-4 ]" *ngIf="item.value.multipleChoice !== undefined">
 
-                    <input type="checkbox" required name="multipleChoice" formControlName="multipleChoice"
+                    <input type="checkbox" name="multipleChoice" formControlName="multipleChoice"
                     [id]="'multipleChoice'+ i" />
                     <label class="[ ml-3 ]" [for]="'multipleChoice'+ i">Allow user to choose multiple answers</label>
 
@@ -85,4 +85,4 @@
     
 </form>
 
-<button class="[ btn__primary-color w-full mt-10 ]" type="submit" (click)="onSubmit()">Create Task</button>
+<button class="[ btn__primary-color w-full my-10  ]" type="submit" (click)="onSubmit()">Create Task</button>

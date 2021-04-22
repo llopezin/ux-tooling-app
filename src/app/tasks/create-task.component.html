@@ -6,7 +6,7 @@
     </h2>
     
 
-    <form (ngSubmit)="onSubmit()" [formGroup]="newTaskForm">
+    <form class="[ px-14 pt-6 pb-10 my-8 ] [ bg-background ] [ rounded-lg shadow-2xl ]" (ngSubmit)="onSubmit()" [formGroup]="newTaskForm">
     
 
         <div class="[ my-4 ]">
@@ -33,6 +33,11 @@
 
         </div>
 
+    
+    </form>
+
+    <button class="[ btn__primary-color w-full mt-10 ]" *ngIf="newTaskForm.get('type').value.length === 1">Create Task</button>
+
         <div>
 
             <app-create-survey (createSurvey)="createSurvey($event)" *ngIf="type.value === 'Survey'"></app-create-survey>
@@ -41,7 +46,6 @@
     
         </div>    
     
-    </form>
 
 
 </div>

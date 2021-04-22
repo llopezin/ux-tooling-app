@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Workspace } from '../../models/workspace.model';
 import { Campaign } from "../../../dashboard/models/campaign.model"
+import { Task } from 'src/app/campaign/models/task.model';
 
 //Workspace
 export const getWorkspace = createAction(
@@ -16,6 +17,7 @@ export const getWorkspaceError = createAction(
     '[Workspace] get workspace Error',
     props<{ payload: any }>()
 );
+
 
 //get campaigns
 export const getCampaigns = createAction(
@@ -33,6 +35,7 @@ export const getCampaignsError = createAction(
     props<{ payload: any }>()
 );
 
+
 //create campaigns
 export const createCampaign = createAction(
     '[Workspace] create campaigns',
@@ -46,6 +49,23 @@ export const createCampaignSuccess = createAction(
 
 export const createCampaignError = createAction(
     '[Workspace] create campaigns Error',
+    props<{ payload: any }>()
+);
+
+
+//create task
+export const createTask = createAction(
+    '[Workspace] create task',
+    props<{ task: Task, campaign_id: string }>()
+);
+
+export const createTaskSuccess = createAction(
+    '[Workspace] create task success',
+    props<{ campaign: Campaign }>()
+);
+
+export const createTaskError = createAction(
+    '[Workspace] create task Error',
     props<{ payload: any }>()
 );
 

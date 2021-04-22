@@ -18,7 +18,7 @@ module.exports = {
             },
             secondary: '#c8a9a1',
             contrast: '#c9bab7',
-            background: '#fdf8F7',
+            background: '#fcedeb',
             text: '#4a3d38',
             white: colors.white,
           }

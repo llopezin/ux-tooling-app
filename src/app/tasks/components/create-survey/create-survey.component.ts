@@ -47,23 +47,23 @@ export class CreateSurveyComponent implements OnInit {
   newOptionsQuestion(): FormGroup {
     return this.fb.group({
       question: ["", [Validators.required]],
+      type: ["options"],
       options: ["", [Validators.required]],
-      multipleChoice: [false, [Validators.required]],
+      multipleChoice: [false],
     });
   }
 
   newLikertScaleQuestion(): FormGroup {
     return this.fb.group({
       question: ["", [Validators.required]],
+      type: ["likert"],
       tags: ["", [Validators.required]]
     });
   }
 
   onSubmit() {
     if (!this.newSurveyForm.valid) return;
-
-    const questions = this.newSurveyForm.value.questions
-    this.createSurvey.emit(questions)
+    this.createSurvey.emit(this.newSurveyForm.value)
   }
 
   get surveryQuestions() {

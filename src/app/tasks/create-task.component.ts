@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Store} from '@ngrx/store';
-import {AppState} from 'src/app/app.reducers';
-import {createCampaign} from 'src/app/shared/store/workspace-store/workspace.actions';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.reducers';
 
 @Component({
   selector: 'app-create-task',
@@ -15,7 +14,7 @@ export class CreateTaskComponent implements OnInit {
   public type: FormControl;
 
   constructor(private fb: FormBuilder, private store: Store<AppState>) {
-    this.type = new FormControl('Survey', [Validators.required]);
+    this.type = new FormControl(' ', [Validators.required]);
     this.createForm()
   }
 
@@ -37,8 +36,8 @@ export class CreateTaskComponent implements OnInit {
     //disatch action
   }
 
-  createSurvey(e){
-    console.log(e)
+  createSurvey({ questions }) {
+    const surveyTask = { ...this.newTaskForm.value, questions }
   }
 
 }
