@@ -38,6 +38,9 @@
     @apply  p-2 bg-primary-light hover:bg-opacity-90 rounded-md shadow-md;
 }
 
+.lozenge{
+  @apply px-3 py-1 hover:bg-opacity-90 rounded-full shadow-md
+}
 
 /* Inputs */
 .input__primary {

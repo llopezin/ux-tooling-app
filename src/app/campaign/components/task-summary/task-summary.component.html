@@ -1,1 +1,16 @@
-<p>task-summary works!</p>
+<div class="[ flex flex-col justify-between h-full p-8 ] [ bg-background ] [ rounded-lg shadow-2xl ]">
+
+    <h3 class="[ font-bold ]">{{task.name}}</h3>
+    
+    <div class="[ relative mt-4 ]">
+        <p>{{task.active ? "In progress" : "Not started"}}</p>
+        <div class="[ absolute top-0 right-0 ]">{{task.responses || 0}}/{{task.usersRequired || '??'}}</div>
+        <div class="[ w-full h-4 mx-auto ] [ bg-white ] [ border border-text rounded-full ]"></div>
+    </div>
+
+    <div class="[ w-full flex mt-4 ]">
+        <button class="[ lozenge ] [ flex-grow mr-2 ] [ bg-primary-light ]">Results</button>
+        <button class="[ lozenge ] [ flex-grow ] [ bg-primary ]">Edit</button>
+    </div>
+   
+</div>

@@ -21,6 +21,19 @@
 
         </div>
 
+        
+        <div class="[ my-4 ]">
+
+            <label for="task-users">Name</label>
+            <input class="[ input__primary ]" type="number" required name="usersRequired"
+                formControlName="usersRequired" id="task-users"/>
+
+            <div *ngIf="(newTaskForm.get('usersRequired').dirty)">
+                <div *ngIf="newTaskForm.get('usersRequired').errors?.min">At least one user is required</div>
+            </div>
+
+        </div>
+
         <div class="[ my-4 ]">   
 
             <label for="task-type">Type</label>      

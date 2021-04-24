@@ -43,6 +43,7 @@ export class CreateTaskComponent implements OnInit {
   createForm() {
     this.newTaskForm = this.fb.group({
       name: ["", [Validators.required]],
+      usersRequired: [5, [Validators.required, Validators.min(1)]],
       type: this.type,
     });
   }
