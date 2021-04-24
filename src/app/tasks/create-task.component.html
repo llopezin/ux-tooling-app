@@ -44,8 +44,24 @@
             <app-create-card-sorting *ngIf="type.value === 'Card sorting'"></app-create-card-sorting>
             <app-create-tree-test *ngIf="type.value === 'Tree test'"></app-create-tree-test>
     
-        </div>    
+        </div>   
+
+
+    <div class="[ overlay__white ]" *ngIf="taskPosting || taskPosted">
     
+        
+        <div class="[ flex flex-col items-center ]" *ngIf="taskPosting">
+            <div  class="lds-facebook"><div></div><div></div><div></div></div>
+            <p class="[ text-4xl font-bold ]">Creating Task</p>
+        </div>
+
+        <div class="[ flex flex-col items-center ]" *ngIf="taskPosted">
+            <span class="[ text-6xl font-bold text-green-400 ]">✔</span>
+            <p class="[ text-4xl font-bold ]">Task created</p>
+        </div>
+
+
+    </div>
 
 
 </div>

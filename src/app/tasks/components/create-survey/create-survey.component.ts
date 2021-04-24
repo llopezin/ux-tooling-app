@@ -62,7 +62,6 @@ export class CreateSurveyComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('this.newSurveyForm.valid:', this.newSurveyForm.valid)
     if (!this.newSurveyForm.valid) return;
     this.createSurvey.emit(this.newSurveyForm.value)
   }
