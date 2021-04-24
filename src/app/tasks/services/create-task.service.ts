@@ -16,9 +16,4 @@ export class CreateTaskService {
   
   constructor(private http: HttpClient) { }
 
-  createTask(task: Task):  Observable<Campaign>   {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  
-    return  this.http.post<Campaign>( this.API_ENDPOINT, task, { headers }) 
-  }
 }

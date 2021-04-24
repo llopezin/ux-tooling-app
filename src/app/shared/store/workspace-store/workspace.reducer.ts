@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Campaign } from 'src/app/dashboard/models/campaign.model';
-import { getWorkspace, getWorkspaceSuccess, getWorkspaceError, getCampaigns, getCampaignsSuccess, getCampaignsError, createCampaign, createCampaignSuccess, createCampaignError } from './workspace.actions';
+import { getWorkspace, getWorkspaceSuccess, getWorkspaceError, getCampaigns, getCampaignsSuccess, getCampaignsError, createCampaign, createCampaignSuccess, createCampaignError, addTask, addTaskSuccess, addTaskError, getTasks, getTasksSuccess, getTasksError } from './workspace.actions';
 
 
 export interface WorkspaceState {
@@ -25,6 +25,7 @@ export const initialState: WorkspaceState = {
 const _workspaceReducer = createReducer(
   initialState,
 
+  //GET Workspace
   on(getWorkspace, (state) => ({ ...state, loading: true })),
 
   on(getWorkspaceSuccess, (state, { workspace }) => {
@@ -49,6 +50,7 @@ const _workspaceReducer = createReducer(
       message: payload.message,
     },
   })),
+
 
   //GET campaigns
   on(getCampaigns, (state) => ({ ...state, loading: true })),
@@ -76,13 +78,14 @@ const _workspaceReducer = createReducer(
     },
   })),
 
+
   //Create campaign
   on(createCampaign, (state) => ({ ...state, loading: true })),
 
   on(createCampaignSuccess, (state, { campaign_id }) => {
     let newState = {
       ...state,
-      workspace: { ...state.workspace, campaign_ids: [...state.workspace.campaign_ids, campaign_id]},
+      workspace: { ...state.workspace, campaign_ids: [...state.workspace.campaign_ids, campaign_id] },
       loading: false,
       loaded: true
     }
@@ -100,6 +103,76 @@ const _workspaceReducer = createReducer(
       message: payload.message,
     },
   })),
+
+
+  //Add task
+  on(addTask, (state) => ({ ...state, loading: true })),
+
+  on(addTaskSuccess, (state, { campaign }) => {
+    let newState = {
+      ...state,
+      workspace: {
+        ...state.workspace,
+        campaigns: state.workspace.campaigns.map(storedCampaign =>
+          storedCampaign._id === campaign._id ? campaign : storedCampaign
+        )
+      },
+      loading: false,
+      loaded: true
+    }
+    return newState
+  }),
+
+  on(addTaskError, (state, { payload }) => ({
+    ...state,
+    userIsLoggedIn: false,
+    loading: false,
+    loaded: false,
+    error: {
+      url: payload.url,
+      status: payload.status,
+      message: payload.message,
+    },
+  })),
+
+
+   //GET tasks
+   on(getTasks, (state) => ({ ...state, loading: true })),
+
+   on(getTasksSuccess, (state, { tasks }) => {
+     console.log('tasks:', tasks)
+     let campaign_id = window.location.href.match(/(campaign\/[0-9a-z]+)/)[0].replace('campaign/', '')
+     console.log('campaign_id:', campaign_id)
+     let newState = {
+       ...state,
+       workspace: {
+         ...state.workspace,
+         campaigns: state.workspace.campaigns.map(storedCampaign =>
+          storedCampaign._id === campaign_id 
+          ? {...storedCampaign, tasks: tasks} 
+          : storedCampaign
+          )
+        },
+        loading: false,
+        loaded: true
+      }
+      console.log('newState:', newState)
+     return newState
+   }),
+ 
+   on(getTasksError, (state, { payload }) => ({
+     ...state,
+     userIsLoggedIn: false,
+     loading: false,
+     loaded: false,
+     error: {
+       url: payload.url,
+       status: payload.status,
+       message: payload.message,
+     },
+   })),
+ 
+ 
 
 )
 

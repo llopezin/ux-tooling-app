@@ -54,20 +54,37 @@ export const createCampaignError = createAction(
 
 
 //create task
-export const createTask = createAction(
+export const addTask = createAction(
     '[Workspace] create task',
     props<{ task: Task, campaign_id: string }>()
 );
 
-export const createTaskSuccess = createAction(
+export const addTaskSuccess = createAction(
     '[Workspace] create task success',
     props<{ campaign: Campaign }>()
 );
 
-export const createTaskError = createAction(
+export const addTaskError = createAction(
     '[Workspace] create task Error',
     props<{ payload: any }>()
 );
+
+//get tasks
+export const getTasks = createAction(
+    '[Workspace] get tasks',
+    props<{ task_ids: string[] }>()
+);
+
+export const getTasksSuccess = createAction(
+    '[Workspace] get tasks success',
+    props<{ tasks: Task[] }>()
+);
+
+export const getTasksError = createAction(
+    '[Workspace] get tasks Error',
+    props<{ payload: any }>()
+);
+
 
 
 

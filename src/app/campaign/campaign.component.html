@@ -1,4 +1,6 @@
 <div class="[ grid grid-cols-4 ]">
+
+
     <aside class="[ bg-contrast ] ">
         <nav>
             <ul>
@@ -7,8 +9,20 @@
             </ul>
         </nav>
     </aside>
+
+
     <div class="[ p-4 pt-8 ] [ col-start-2 col-end-5 ]">
+
         <h2 class="[ heading__secondary ]">{{campaign?.name}}</h2>
         <button class="[ btn__primary-color ] [ -mt-8 ] [ float-right ]" routerLink="new-task">New task</button>
+
+        <section title="Tasks">
+
+            <app-task-summaries-list></app-task-summaries-list>
+    
+        </section>
+
     </div>
+
+    
 </div>
