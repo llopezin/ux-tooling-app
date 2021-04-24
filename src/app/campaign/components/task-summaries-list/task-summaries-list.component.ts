@@ -24,10 +24,10 @@ export class TaskSummariesListComponent implements OnInit {
   ngOnInit(): void {
     this.store.select('workspaceApp').subscribe(state=>{
       if(state.loading) return
+
       this.updateCampaign(state)  
       if(this.campaign?.user_task_ids)this.getTasks()
-    })
-    
+    }) 
   }
 
   getTasks(){

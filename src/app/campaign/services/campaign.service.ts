@@ -26,7 +26,7 @@ export class CampaignService {
   addTask(campaign_id, task): Observable<Campaign> {
     const token = this.userStore.token;
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-    const newTaskEndpoint = `${this.API_ENDPOINT}/workspace/new-campaign/${campaign_id}`;
+    const newTaskEndpoint = `${this.API_ENDPOINT}/campaigns/${campaign_id}/new-task`;
     
     return this.http.post<Campaign>(newTaskEndpoint, task, { headers });    
   }
