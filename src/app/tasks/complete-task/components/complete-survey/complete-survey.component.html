@@ -1,0 +1,44 @@
+<form class="[ px-14 pt-6 pb-10 my-8 ] [ bg-background ] [ rounded-lg shadow-2xl ]" action=""
+    [formGroup]="completedTaskForm">
+
+
+
+    <div *ngFor="let question of task.questions; let i=index">
+
+        <h3>{{question.question}}</h3>
+
+        <div *ngFor="let option of question?.options?.split(','); let optionIndex=index">
+
+            <div *ngIf="!question.multipleChoice" >
+                <input type="radio" [name]="'question'+(i+1)"
+                    [formControlName]="'question'+(i+1)" [id]="'option'+(i+1)+'.'+(optionIndex+1)" [value]="option" />
+                <label class="[ ml-3 ]" [for]="'option'+(i+1)+'.'+(optionIndex+1)">{{option}}</label>
+            </div>
+
+      
+                <div [formGroupName]="'question'+(i+1)">
+                    <div *ngIf="question.multipleChoice === true">
+                        <input type="checkbox" [name]="'option'+(optionIndex+1)" [formControlName]="optionIndex"
+                            [id]="'option'+(i+1)+'.'+(optionIndex+1)" [value]="option" />
+                        <label class="[ ml-3 ]" [for]="'option'+(i+1)+'.'+(optionIndex+1)">{{option}}</label>
+                    </div>
+                </div>
+
+        </div>
+
+
+        <div *ngFor="let tag of question?.tags?.split(','); let tagIndex=index">
+
+            <input type="radio" [name]="'question'+(i+1)" [formControlName]="'question'+(i+1)" [id]="'tag'+(i+1)+'.'+(tagIndex+1)" [value]="tag" />
+            <label class="[ ml-3 ]" [for]="'tag'+(i+1)+'.'+(tagIndex+1)" >{{tag}}</label>
+
+        </div>
+
+
+    </div>
+
+
+</form>
+
+<button (click)="onSubmit()">Submit</button>
+{{ completedTaskForm?.value | json }}

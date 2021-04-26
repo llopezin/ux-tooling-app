@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
 import { Campaign } from 'src/app/dashboard/models/campaign.model';
 import { getTasks } from 'src/app/shared/store/workspace-store/workspace.actions';
-import { Task } from 'src/app/tasks/models/task';
+import { Task } from 'src/app/tasks/create-task/models/task';
 
 @Component({
   selector: 'app-task-summaries-list',

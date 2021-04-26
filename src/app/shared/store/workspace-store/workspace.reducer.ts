@@ -140,16 +140,14 @@ const _workspaceReducer = createReducer(
    on(getTasks, (state) => ({ ...state, loading: true })),
 
    on(getTasksSuccess, (state, { tasks }) => {
-     console.log('tasks:', tasks)
      let campaign_id = window.location.href.match(/(campaign\/[0-9a-z]+)/)[0].replace('campaign/', '')
-     console.log('campaign_id:', campaign_id)
      let newState = {
        ...state,
        workspace: {
          ...state.workspace,
          campaigns: state.workspace.campaigns.map(storedCampaign =>
           storedCampaign._id === campaign_id 
-          ? {...storedCampaign, tasks: tasks} 
+          ? {...storedCampaign, tasks: tasks.reverse()} 
           : storedCampaign
           )
         },

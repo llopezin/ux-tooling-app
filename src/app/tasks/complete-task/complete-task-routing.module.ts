@@ -1,14 +1,14 @@
 import { RouterModule, Routes } from "@angular/router";
 
 import { NgModule } from "@angular/core";
-import { CreateTaskComponent } from "./create-task.component";
+import { CompleteTaskComponent } from "./complete-task.component";
 
 const routes: Routes = [
-{ path: '', component: CreateTaskComponent },
+{ path: '', component: CompleteTaskComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TasksRoutingModule { }
+export class CompleteTaskRoutingModule { }

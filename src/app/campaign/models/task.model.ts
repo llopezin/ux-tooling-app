@@ -6,6 +6,6 @@ export interface Task{
     active: boolean,
     completed: boolean,
     responses: [],
-    task: object,
+    questions: {multipleChoice: Boolean, options: string}[],
     results: object
 }

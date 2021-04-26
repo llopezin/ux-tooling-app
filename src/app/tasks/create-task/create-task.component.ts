@@ -3,9 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
-import { Task } from '../campaign/models/task.model';
-import { Campaign } from '../dashboard/models/campaign.model';
-import { addTask } from '../shared/store/workspace-store/workspace.actions';
+import { Task } from 'src/app/campaign/models/task.model';
+import { Campaign } from 'src/app/dashboard/models/campaign.model';
+import { addTask } from 'src/app/shared/store/workspace-store/workspace.actions';
 
 @Component({
   selector: 'app-create-task',

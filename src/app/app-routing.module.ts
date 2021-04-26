@@ -11,7 +11,9 @@ loadChildren: () => import("./dashboard/dashboard.module").then((m) => m.Dashboa
   loadChildren: () => import("./user/user.module").then((m) => m.UserModule),
 },
 { path: 'campaign/:id', loadChildren: () => import('./campaign/campaign.module').then(m => m.CampaignModule) },
-{ path: 'campaign/:id/new-task', loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksModule) }];
+{ path: 'campaign/:id/new-task', loadChildren: () => import('./tasks/create-task/create-task.module').then(m => m.TasksModule) },
+{ path: 'complete-task/:id', loadChildren: () => import('./tasks/complete-task/complete-task.module').then(m => m.CompleteTaskModule) },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
