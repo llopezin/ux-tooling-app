@@ -58,7 +58,8 @@ export class CreateTaskComponent implements OnInit {
   }
 
   createSurvey({ questions }) {
-    this.task = { ...this.newTaskForm.value, questions }
+    this.task = { ...this.newTaskForm.value, questions, responses: [] }
+    console.log('this.task:', this.task)
     this.store.dispatch(addTask({ task: this.task, campaign_id: this.campaign_id }))
     this.taskPosting = true
   }
