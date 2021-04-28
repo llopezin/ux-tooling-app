@@ -13,6 +13,7 @@ loadChildren: () => import("./dashboard/dashboard.module").then((m) => m.Dashboa
 { path: 'campaign/:id', loadChildren: () => import('./campaign/campaign.module').then(m => m.CampaignModule) },
 { path: 'campaign/:id/new-task', loadChildren: () => import('./tasks/create-task/create-task.module').then(m => m.TasksModule) },
 { path: 'complete-task/:id', loadChildren: () => import('./tasks/complete-task/complete-task.module').then(m => m.CompleteTaskModule) },
+{ path: 'results/:id', loadChildren: () => import('./tasks/results/results.module').then(m => m.ResultsModule) },
 ];
 
 @NgModule({

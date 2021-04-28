@@ -1,16 +1,33 @@
 <div class="[ flex flex-col justify-between h-full p-8 mt-6 ] [ bg-background ] [ rounded-lg shadow-2xl ]">
 
+
     <h3 class="[ font-bold ]">{{task.name}}</h3>
-    
+
+    <textarea class="[ sr-only ]" [id]="'link'+task._id"
+        [value]="'http://localhost:4200/complete-task/'+task._id"></textarea>
+
+    <button class="[ -mt-3 ] [ text-left underline ]" (click)="copyLinkToClipboard()">{{linkCopied ? 'Copied to clipboard' :'Copy link'}}</button>
+
+
     <div class="[ relative mt-4 ]">
+
         <p>{{task.active ? "In progress" : "Not started"}}</p>
-        <div class="[ absolute top-0 right-0 ]">{{task.responses || 0}}/{{task.usersRequired || '??'}}</div>
-        <div class="[ w-full h-4 mx-auto ] [ bg-white ] [ border border-text rounded-full ]"></div>
+        <div class="[ absolute top-0 right-0 ]">{{task.responses.length || 0}}/{{task.usersRequired || 10}}</div>
+
+        <div class="[ w-full h-4 mx-auto ] [ bg-white ] [ border border-text rounded-full ]">
+            <div class="[ h-full hidden ] [ bg-primary ] [ rounded-full ]" [id]="task._id"></div>
+        </div>
+
     </div>
 
+
     <div class="[ w-full flex mt-4 ]">
-        <button class="[ lozenge ] [ flex-grow mr-2 ] [ bg-primary-light ]">Results</button>
+
+        <button class="[ lozenge ] [ flex-grow mr-2 ] [ bg-primary-light ]"
+            [routerLink]="['/results', task._id]">Results</button>
         <button class="[ lozenge ] [ flex-grow ] [ bg-primary ]">Edit</button>
+
     </div>
-   
+
+
 </div>

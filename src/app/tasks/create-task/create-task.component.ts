@@ -31,6 +31,7 @@ export class CreateTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm()
+
     this.store.select('workspaceApp').subscribe(state => {
       if (state.loading) return
 
@@ -48,19 +49,11 @@ export class CreateTaskComponent implements OnInit {
     });
   }
 
-
-
-  onSubmit() {
-    if (!this.newTaskForm.valid) return;
-    const { name, type } = this.newTaskForm.value;
-
-    //disatch action
-  }
-
   createSurvey({ questions }) {
     this.task = { ...this.newTaskForm.value, questions, responses: [] }
-    console.log('this.task:', this.task)
+
     this.store.dispatch(addTask({ task: this.task, campaign_id: this.campaign_id }))
+    
     this.taskPosting = true
   }
 

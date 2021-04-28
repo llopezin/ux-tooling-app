@@ -21,7 +21,7 @@ import {WorkspaceEffects} from './shared/store/workspace-store/workspace.effects
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
