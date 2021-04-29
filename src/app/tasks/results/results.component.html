@@ -1,10 +1,19 @@
 <div class=" [ mt-10 ]">
     
-    <h2 class="[ text-3xl ]" >{{task.name}}</h2>
+    <h2 class="[ text-3xl ]" >{{task?.name}}</h2>
     
     <div class="[ p-10 m-14 ] [ bg-background ] [ rounded-lg shadow-lg ]" *ngFor="let question of task?.questions, let i = index">
+        
         <h2 class="[ p-5 ] [ text-xl ]">{{question.question}}</h2>
+
+        <form [formGroup]="changeChartSelector">
+            <select name="chartType" id="" formControlName="chartType" (change)="changeChart(i)">
+                <option *ngFor="let type of chartTypes" [value]="type">{{type}}</option>
+            </select>
+        </form>
+        
         <canvas [id]="'question'+i"></canvas>
+
     </div>
 
 </div>
