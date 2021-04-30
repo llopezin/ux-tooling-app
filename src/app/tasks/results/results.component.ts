@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Task } from 'src/app/campaign/models/task.model';
 import { CompleteTaskService } from '../complete-task/services/complete-task.service';
 import { Chart, registerables } from 'chart.js';
-import { ThrowStmt } from '@angular/compiler';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -32,22 +31,23 @@ export class ResultsComponent implements OnInit {
     this.taskService.getTask(this.task_id).subscribe(res => { this.task = res; setTimeout(() => { this.createCharts() }, 500) })
   }
 
-  buildChangeChartForm(){
-    this.changeChartSelector = this.fb.group({chartType: ['bar']})
+  buildChangeChartForm() {
+    this.changeChartSelector = this.fb.group({ chartType: ['bar'] })
   }
 
   createCharts() {
     Chart.register(...registerables);
     this.charts = this.task.questions.map((question, i) => { return this.buildChart(i, question) })
-    console.log('this.charts:', this.charts)
-
   }
 
   buildChart(i, question, type: any = 'bar') {
     const id = `question${i}`
     const labels = question.options ? question.options.split(',') : question.tags.split(',')
+    const scaleOptions = { scales: { y: { beginAtZero: true } } }
+    const chartRequiresScale = type === 'bar' || type === 'line'
+    const options = chartRequiresScale ? scaleOptions : {}
 
-    let chart = new Chart(id, {
+    const chartObj = {
       type: type,
       data: {
         labels: labels,
@@ -57,14 +57,10 @@ export class ResultsComponent implements OnInit {
           backgroundColor: this.getBackgrounds(labels),
         }]
       },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        },
-      },
-    });
+      options: options,
+    };
+
+    const chart = new Chart(id, chartObj)
 
     return chart
 
@@ -72,13 +68,11 @@ export class ResultsComponent implements OnInit {
 
 
   getData(i) {
-    console.log(this.task.questions[i].question)
-
-    let question = this.task.questions[i]
-    let questionText = question.question
-    let options = question.options ? question.options.split(',') : question.tags.split(',')
-    let responses = this.task.responses.map(response => response[questionText]).filter(r => r).flat()
-    let data = []
+    const question = this.task.questions[i]
+    const questionText = question.question
+    const options = question.options ? question.options.split(',') : question.tags.split(',')
+    const responses = this.task.responses.map(response => response[questionText]).filter(r => r).flat()
+    const data = []
 
     options.forEach(option => {
       data.push(responses.filter(response => response === option).length)
@@ -88,14 +82,19 @@ export class ResultsComponent implements OnInit {
   }
 
   changeChart(i) {
-    let chart = this.charts[i]
-    chart.config.type = this.changeChartSelector.value.chartType || 'bar'
-    chart.update()
-    console.log('chart:', chart)
+    const currentChart = this.charts[i]
+    
+    currentChart.destroy()
+
+    const question = this.task.questions[i];
+    const chartType = this.changeChartSelector.get('chartType').value
+    const chart = this.buildChart(i, question, chartType)
+
+    this.charts[i] = chart
   }
 
   getBackgrounds(labels) {
-    let backgrounds = [];
+    const backgrounds = [];
 
     labels.forEach(label => {
       backgrounds.push(this.random_rgba())
