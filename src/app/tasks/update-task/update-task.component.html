@@ -1,0 +1,68 @@
+<div class="[ max-w-screen-lg mx-auto pt-8 ]">
+
+
+    <h2 class="[ heading__secondary ]">
+        New Task
+    </h2>
+    
+
+    <form class="[ px-14 pt-6 pb-10 my-8 ] [ bg-background ] [ rounded-lg shadow-2xl ]" [formGroup]="newTaskForm">
+    
+
+        <div class="[ my-4 ]">
+
+            <label for="task-name">Name</label>
+            <input class="[ input__primary ]" type="text" placeholder="task name" required name="name"
+                formControlName="name" id="task-name"/>
+
+            <div *ngIf="(newTaskForm.get('name').dirty)">
+                <div *ngIf="newTaskForm.get('name').errors?.required">Name is required</div>
+            </div>
+
+        </div>
+
+        
+        <div class="[ my-4 ]">
+
+            <label for="task-users">Users required</label>
+            <input class="[ input__primary ]" type="number" required name="usersRequired"
+                formControlName="usersRequired" id="task-users"/>
+
+            <div *ngIf="(newTaskForm.get('usersRequired').dirty)">
+                <div *ngIf="newTaskForm.get('usersRequired').errors?.min">At least one user is required</div>
+            </div>
+
+        </div>
+
+        
+    </form>
+
+    <button class="[ btn__primary-color w-full mt-10 ]" *ngIf="newTaskForm.get('type').value.length === 1">update Task</button>
+
+        <div>
+
+            <app-update-survey (updateSurvey)="updateSurvey($event)" *ngIf="type.value === 'Survey'"></app-update-survey>
+            <app-update-card-sorting *ngIf="type.value === 'Card sorting'"></app-update-card-sorting>
+            <app-update-tree-test *ngIf="type.value === 'Tree test'"></app-update-tree-test>
+    
+        </div>   
+
+
+    <div class="[ overlay__white ]" *ngIf="taskPosting || taskPosted">
+    
+        
+        <div class="[ flex flex-col items-center ]" *ngIf="taskPosting">
+            <div  class="lds-facebook"><div></div><div></div><div></div></div>
+            <p class="[ text-4xl font-bold ]">Creating Task</p>
+        </div>
+
+        <div class="[ flex flex-col items-center ]" *ngIf="taskPosted">
+            <span class="[ text-6xl font-bold text-green-400 ]">✔</span>
+            <p class="[ text-4xl font-bold ]">Task updated</p>
+        </div>
+
+
+    </div>
+
+
+</div>

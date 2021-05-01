@@ -1,0 +1,61 @@
+<h3 class="[ heading__secondary ]">My Survey</h3>
+
+<form class="[ p-14 my-8 ] [ bg-background ] [ rounded-lg shadow-2xl ]" (ngSubmit)="onSubmit()" [formGroup]="newSurveyForm">
+
+
+    <div formArrayName="questions">
+
+        <div class="[ mb-16 ]" *ngFor="let item of surveryQuestions.controls; let i=index" [formGroupName]="i">
+
+                <h4 class="[ font-bold text-xl ]">Question {{i+1}}</h4>
+
+           
+                    <button class="[ float-right -mt-6 ] [ underline ]" (click)="deleteQuestion(i)">Remove</button>
+            
+
+                <div class="[ my-4 ]">
+
+                    <label class="[ hidden ]" [for]="'question'+ i">Question</label>
+                    <input class="[ input__primary ]" type="text" placeholder="Write your question" required
+                        [name]="'question'+ i" [formControlName]="'question'" [id]="'question'+ i" />
+
+                </div>
+
+                <div class="[ my-4 ]" *ngIf="item.value.options !== undefined">
+
+                    <label [for]="'options'+ i">Options</label>
+                    <input class="[ input__primary ]" type="text" placeholder="Type the options separated by commas"
+                        required name="options" formControlName="options" [id]="'options'+ i" />
+
+                </div>
+
+
+                <div class="[ my-4 ]" *ngIf="item.value.multipleChoice !== undefined">
+
+                    <input type="checkbox" name="multipleChoice" formControlName="multipleChoice"
+                    [id]="'multipleChoice'+ i" />
+                    <label class="[ ml-3 ]" [for]="'multipleChoice'+ i">Allow user to choose multiple answers</label>
+
+                </div>
+
+                <div class="[ my-4 ]" *ngIf="item.value.tags !== undefined">
+
+                    <label [for]="'tags'+ i">Tags</label>
+                    <p>Tags are unique answers your question, users will only be able to pick one</p>
+                    <input class="[ input__primary ]" type="text" placeholder="Type the tags separated by commas"
+                        required name="tags" formControlName="tags" [id]="'tags'+ i" />
+
+                </div>
+
+        </div>
+
+    </div>
+
+    <div class="[ grid grid-cols-2 mt-10 ]">
+        <button class="[ btn__primary-light ] [ mx-2 ]" (click)="addQuestion('options')">Add options question</button>
+        <button class="[ btn__primary-light ] [ mx-2 ]" (click)="addQuestion('likert')">Add likert scale questions</button>
+    </div>
+    
+</form>
+
+<button class="[ btn__primary-color w-full my-10  ]" type="submit" (click)="onSubmit()">update Task</button>

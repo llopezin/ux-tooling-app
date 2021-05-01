@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Task } from '../../models/task.model';
 
 @Component({
@@ -10,8 +11,11 @@ export class TaskSummaryComponent implements OnInit {
 
   @Input() task: Task
   public linkCopied: boolean = false
+  public campaign_id: string;
 
-  constructor() { }
+  constructor( route: ActivatedRoute) { 
+    this.campaign_id = route.snapshot.paramMap.get('id')
+  }
 
   ngOnInit(): void {
     setTimeout(() => { this.setProgress() }, 500);

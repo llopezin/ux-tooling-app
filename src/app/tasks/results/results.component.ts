@@ -73,11 +73,11 @@ export class ResultsComponent implements OnInit {
     const options = question.options ? question.options.split(',') : question.tags.split(',')
     const responses = this.task.responses.map(response => response[questionText]).filter(r => r).flat()
     const data = []
-
+    
     options.forEach(option => {
       data.push(responses.filter(response => response === option).length)
     });
-
+    
     return data
   }
 
@@ -108,7 +108,7 @@ export class ResultsComponent implements OnInit {
       r = Math.random,
       s = 255;
     return (
-      'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + '1' + ')'
+      'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + '0.6' + ')'
     );
   }
 
