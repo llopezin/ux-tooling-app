@@ -6,6 +6,8 @@ import { AppState } from 'src/app/app.reducers';
 import { Task } from 'src/app/campaign/models/task.model';
 import { Campaign } from 'src/app/dashboard/models/campaign.model';
 import { addTask } from 'src/app/shared/store/workspace-store/workspace.actions';
+import { TasksModule } from '../create-task/create-task.module';
+import { updateTaskService } from './services/update-task.service';
 
 @Component({
   selector: 'app-update-task',
@@ -23,34 +25,26 @@ export class UpdateTaskComponent implements OnInit {
   public task: Task;
   public campaign: Campaign
 
-  constructor(private fb: FormBuilder, private store: Store<AppState>, private router: Router, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private store: Store<AppState>, private router: Router, private route: ActivatedRoute, private taskService: updateTaskService) {
 
     this.type = new FormControl(' ', [Validators.required]);
-    this.campaign_id = this.route.snapshot.paramMap.get('id');
-    this.task_id = this.route.snapshot.paramMap.get('id');
+    this.campaign_id = this.route.snapshot.paramMap.get('campaign_id');
+    this.task_id = this.route.snapshot.paramMap.get('task_id');
+    this.updateForm({})
 
   }
 
   ngOnInit(): void {
-    this.updateForm()
 
-    this.store.select('workspaceApp').subscribe(state => {
-      if (state.loading) return
 
-      let campaigns = state.workspace.campaigns
-      if(campaigns)this.campaign = campaigns.find(campaing => campaing._id === this.campaign_id)
+    this.taskService.getTask(this.task_id).subscribe(task => {this.task = task; this.updateForm(this.task)})
 
-      if(this.campaign)this.task = this.campaign.tasks.find(task => task._id === this.task_id)
-      
-      if (this.currentTaskIsPosted()) { this.taskPosting = false; this.taskPosted = true }
-
-    })
   }
 
-  updateForm() {
+  updateForm(task) {
     this.newTaskForm = this.fb.group({
-      name: ["", [Validators.required]],
-      usersRequired: [5, [Validators.required, Validators.min(1)]],
+      name: [task.name || "", [Validators.required]],
+      usersRequired: [task.usersRequired || 0, [Validators.required, Validators.min(1)]],
     });
   }
 

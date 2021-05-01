@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
+import { Task } from 'src/app/campaign/models/task.model';
 
 @Component({
   selector: 'app-update-survey',
@@ -9,21 +10,24 @@ import { AppState } from 'src/app/app.reducers';
   styleUrls: ['./update-survey.component.css']
 })
 export class UpdateSurveyComponent implements OnInit {
+
   public newSurveyForm: FormGroup;
   @Output() updateSurvey: EventEmitter<any> = new EventEmitter();
+  @Input() task: Task
 
   constructor(private fb: FormBuilder, private store: Store<AppState>) {
   }
 
   ngOnInit(): void {
     this.updateForm()
-    console.log(this.surveryQuestions.controls);
+    console.log(this.task);
+    console.log(this.currentQuestions())
 
   }
 
   updateForm() {
     this.newSurveyForm = this.fb.group({
-      questions: this.fb.array([this.newOptionsQuestion()])
+      questions: this.fb.array(this.currentQuestions())
     }
     );
   }
@@ -42,6 +46,22 @@ export class UpdateSurveyComponent implements OnInit {
 
   deleteQuestion(i) {
     this.surveryQuestions.removeAt(i)
+  }
+
+  currentQuestions() {
+
+    return this.task.questions.map(({ question, type, options, multipleChoice }) => {
+
+      return this.fb.group({
+        question: [question, [Validators.required]],
+        type: [type],
+        options: [options, [Validators.required]],
+        multipleChoice: [multipleChoice],
+
+      })
+
+    })
+
   }
 
   newOptionsQuestion(): FormGroup {

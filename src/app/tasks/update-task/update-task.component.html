@@ -2,7 +2,7 @@
 
 
     <h2 class="[ heading__secondary ]">
-        New Task
+       {{ task?.name }}
     </h2>
     
 
@@ -37,13 +37,12 @@
         
     </form>
 
-    <button class="[ btn__primary-color w-full mt-10 ]" *ngIf="newTaskForm.get('type').value.length === 1">update Task</button>
 
         <div>
 
-            <app-update-survey (updateSurvey)="updateSurvey($event)" *ngIf="type.value === 'Survey'"></app-update-survey>
-            <app-update-card-sorting *ngIf="type.value === 'Card sorting'"></app-update-card-sorting>
-            <app-update-tree-test *ngIf="type.value === 'Tree test'"></app-update-tree-test>
+            <app-update-survey (updateSurvey)="updateSurvey($event)" [task]="task" *ngIf="task?.type"></app-update-survey>
+            <app-update-card-sorting *ngIf="task?.type === 'Card sorting'"></app-update-card-sorting>
+            <app-update-tree-test *ngIf="task?.type === 'Tree test'"></app-update-tree-test>
     
         </div>   
 
