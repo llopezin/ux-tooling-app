@@ -24,45 +24,54 @@ export class UpdateTaskComponent implements OnInit {
   public taskPosted: boolean;
   public task: Task;
   public campaign: Campaign
+  public nullTask: { name: any, usersRequired: any }
 
-  constructor(private fb: FormBuilder, private store: Store<AppState>, private router: Router, private route: ActivatedRoute, private taskService: updateTaskService) {
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<AppState>,
+    private router: Router,
+    private route: ActivatedRoute,
+    private taskService: updateTaskService,
+  ) {
 
     this.type = new FormControl(' ', [Validators.required]);
     this.campaign_id = this.route.snapshot.paramMap.get('campaign_id');
     this.task_id = this.route.snapshot.paramMap.get('task_id');
-    this.updateForm({})
+    this.nullTask = { name: "", usersRequired: "" }
+    this.updateForm(this.nullTask)
 
   }
 
   ngOnInit(): void {
-
-
-    this.taskService.getTask(this.task_id).subscribe(task => {this.task = task; this.updateForm(this.task)})
-
+    this.taskService.getTask(this.task_id).subscribe(task => { this.task = task; this.updateForm(this.task) })
   }
 
-  updateForm(task) {
+  updateForm({ name, usersRequired }) {
+
     this.newTaskForm = this.fb.group({
-      name: [task.name || "", [Validators.required]],
-      usersRequired: [task.usersRequired || 0, [Validators.required, Validators.min(1)]],
+
+      name: [name, [Validators.required]],
+      usersRequired: [usersRequired, [Validators.required, Validators.min(1)]],
+
     });
+
   }
 
   updateSurvey({ questions }) {
-    this.task = { ...this.newTaskForm.value, questions }
-    console.log('this.task:', this.task)
+    this.task = { ...this.newTaskForm.value, questions, _id: this.task_id }
 
-    //this.store.dispatch(editTask({ task: this.task }))
+    this.taskService.updateTask(this.task_id, this.task).subscribe(res => {
+      this.taskPosted = true;
+      this.navigateToCampaign()
+    })
+
+    //dispatch get tasks
 
     this.taskPosting = true
   }
 
-
-
-  currentTaskIsPosted() {
-    if (!this.campaign || !this.campaign.tasks) return
-
-    return this.campaign.tasks.some(task => task.name === this.task?.name)
+  navigateToCampaign(){
+    this.router.navigate([`campaign/${this.campaign_id}`])
   }
 
 }

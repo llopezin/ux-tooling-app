@@ -20,9 +20,6 @@ export class UpdateSurveyComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateForm()
-    console.log(this.task);
-    console.log(this.currentQuestions())
-
   }
 
   updateForm() {
