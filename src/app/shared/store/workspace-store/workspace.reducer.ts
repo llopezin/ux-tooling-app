@@ -63,7 +63,9 @@ const _workspaceReducer = createReducer(
       loading: false,
       loaded: true
     }
+
     return newState
+    
   }),
 
   on(getCampaignsError, (state, { payload }) => ({
@@ -140,7 +142,7 @@ const _workspaceReducer = createReducer(
    on(getTasks, (state) => ({ ...state, loading: true })),
 
    on(getTasksSuccess, (state, { tasks }) => {
-     let campaign_id = window.location.href.match(/(campaign\/[0-9a-z]+)/)[0].replace('campaign/', '')
+     let campaign_id = window.location.href.match(/(campaign\/[0-9a-z]+)/)?.[0].replace('campaign/', '')
      let newState = {
        ...state,
        workspace: {
@@ -154,7 +156,7 @@ const _workspaceReducer = createReducer(
         loading: false,
         loaded: true
       }
-      console.log('newState:', newState)
+
      return newState
    }),
  

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Task } from 'src/app/campaign/models/task.model';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CompleteTaskService } from '../../services/complete-task.service';
+import { CompletedTaskUserStoreService } from 'src/app/shared/services/completed-task-user-store.service copy';
 
 
 @Component({
@@ -12,12 +13,15 @@ import { CompleteTaskService } from '../../services/complete-task.service';
 export class CompleteSurveyComponent implements OnInit {
 
   public completedTaskForm: FormGroup
+  public taskCompleted: Boolean
+  public taskPosting: Boolean
   @Input() task: Task
 
-  constructor(private fb: FormBuilder, private completeTaskService: CompleteTaskService) { }
+  constructor(private fb: FormBuilder, private completeTaskService: CompleteTaskService, private completedTaskStore: CompletedTaskUserStoreService) { }
 
   ngOnInit(): void {
     this.createForm()
+    if(this.completedTaskStore.completed.includes(this.task._id))this.taskCompleted = true 
   }
 
   createForm() {
@@ -52,13 +56,17 @@ export class CompleteSurveyComponent implements OnInit {
     const response = this.completedTaskForm.value;
     const questions = this.task.questions;
 
+    if(!this.completedTaskForm.valid)return
+
+    this.taskPosting = true
+
     for (let value in response) {
       let questionIndex = parseFloat(value.replace(/[a-z]/g, '')) - 1
 
       if (typeof response[value] === "object") {
         let optionsArr = questions[questionIndex].options.split(',')
         let checkedBoxesValues = optionsArr.filter((option, i) => { return response[value][i] ? option : false })
-        
+
         response[value] = checkedBoxesValues
       }
 
@@ -68,8 +76,10 @@ export class CompleteSurveyComponent implements OnInit {
       delete response[value]
     }
 
-    this.completeTaskService.postResponse(this.task._id, response).subscribe(res=>console.log(res))
-    console.log(response);
+    this.completeTaskService.postResponse(this.task._id, response).subscribe(res => {
+      this.taskCompleted = true
+      this.completedTaskStore.completeTask(this.task._id)
+    })
 
   }
 

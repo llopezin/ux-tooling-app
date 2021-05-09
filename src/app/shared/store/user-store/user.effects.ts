@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
- login, loginError, loginSuccess, register
+ login, loginError, loginSuccess
 } from './user.actions';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';

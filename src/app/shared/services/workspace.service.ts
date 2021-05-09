@@ -4,24 +4,23 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserStoreService } from 'src/app/shared/services/user-store.service';
 import { Login } from 'src/app/user/models/login';
-import { Campaign } from '../models/campaign.model';
-import { Dashboard } from '../models/dashboard.model';
+import { Workspace } from '../models/workspace.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DashboardService {
+export class workspaceService {
   private API_ENDPOINT = "/api"; //add endpoint here when api is deployed
 
 
   constructor(private http: HttpClient, private userStore: UserStoreService) { }
 
-  getDashboard(): Observable<Dashboard> {
-    const Dashboard_id = this.userStore.Dashboard;
+  getWorkspace(): Observable<Workspace> {
+    const workspace_id = this.userStore.workspace;
     const token = this.userStore.token;
-    const DashboardEndpoint = `${this.API_ENDPOINT}/dashboard/${Dashboard_id}`;
+    const workspaceEndpoint = `${this.API_ENDPOINT}/workspace/${workspace_id}`;
 
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-    return this.http.get<Dashboard>(DashboardEndpoint, { headers })
+    return this.http.get<Workspace>(workspaceEndpoint, { headers })
   }
 }

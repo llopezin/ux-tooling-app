@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
@@ -11,18 +11,19 @@ import { Task } from 'src/app/tasks/create-task/models/task';
   templateUrl: './task-summaries-list.component.html',
   styleUrls: ['./task-summaries-list.component.css']
 })
-export class TaskSummariesListComponent implements OnInit {
+export class TaskSummariesListComponent implements OnInit, OnDestroy {
 
   public tasks: Task[]
   public campaign: Campaign
   public campaign_id: string
+  private storeSubscription: any
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute) {
     this.campaign_id = this.route.snapshot.paramMap.get('id')
    }
 
   ngOnInit(): void {
-    this.store.select('workspaceApp').subscribe(state=>{
+    this.storeSubscription = this.store.select('workspaceApp').subscribe(state=>{
       if(state.loading) return
 
       this.updateCampaign(state)  
@@ -38,5 +39,9 @@ export class TaskSummariesListComponent implements OnInit {
 
   updateCampaign(state){
     this.campaign = state.workspace?.campaigns?.find(campaign=>campaign._id == this.campaign_id)
+  }
+
+  ngOnDestroy(): void {
+    this.storeSubscription.unsubscribe()
   }
 }

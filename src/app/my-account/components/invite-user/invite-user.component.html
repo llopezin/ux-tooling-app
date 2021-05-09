@@ -1,0 +1,42 @@
+<div class="[ mt-8 p-8 ] [ shadow-lg rounded-lg ] [ bg-background ]">
+
+    <h2 class="[ mt-4 ] [ text-xl font-bold ]">Add member</h2>
+    <p>Members added to this workspace will be able to access and edit all campaigns.</p>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="inviteUserForm">
+
+        <!-- invited user mail -->
+        <div class="[ my-4 ]">
+            <label class="[ m-2 ]" for="email">Email:</label>
+            <input class="[ input__primary ] [ mt-1 ]" id="email" type="text" placeholder="email" required name="email"
+                formControlName="email" />
+            <div *ngIf="(inviteUserForm.get('email').dirty)">
+                <div *ngIf="inviteUserForm.get('email').errors?.email">Invalid email</div>
+                <div *ngIf="inviteUserForm.get('email').errors?.required">Email is required</div>
+            </div>
+        </div>
+
+        <div class="[ w-full text-right mt-8 ]">
+            <button class="[ btn ] [ gradient-bg text-white text-xl font-bold hover:shadow-xl ]" type="submit">Add
+                member</button>
+        </div>
+
+    </form>
+
+</div>
+
+<div class="[ overlay__white ]" *ngIf="postingInvitation || invitationPosted">
+    
+        
+    <div class="[ flex flex-col items-center ]" *ngIf="postingInvitation">
+        <div  class="lds-facebook"><div></div><div></div><div></div></div>
+        <p class="[ text-4xl font-bold ]">Inviting new member</p>
+    </div>
+
+    <div class="[ flex flex-col items-center ]" *ngIf="invitationPosted">
+        <span class="[ text-6xl font-bold text-green-400 ]">✔</span>
+        <p class="[ text-4xl font-bold ]">Member inviteded</p>
+    </div>
+
+
+</div>

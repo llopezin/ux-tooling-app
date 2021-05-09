@@ -16,6 +16,12 @@ export class DashboardComponent implements OnInit {
   constructor(private userService: UserService, private store: Store<AppState>) { }
 
   ngOnInit(): void {
+    this.store.select('workspaceApp').subscribe(state => {
+      if (!state.workspace) this.getWorkspace()
+    })
+  }
+
+  getWorkspace() {
     this.userService.getProfile().subscribe(() => {
       this.store.dispatch(getWorkspace())
     })

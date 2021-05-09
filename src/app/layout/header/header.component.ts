@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,20 +8,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  private url: string;
+  public isCampaigns: boolean;
 
 
-  constructor( private route: ActivatedRoute) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.url = window.location.href
-    this.isCampaigns()
-  }
 
-  isCampaigns(){
-    let splitUrl = this.url.split('/')
-    let lastItem = splitUrl[splitUrl.length -1]
-    return lastItem === 'campaigns'
+    this.router.events.subscribe(e => {
+      if (e instanceof NavigationEnd) {
+        this.isCampaigns = e.url === "/campaigns"
+      }
+    });
   }
 
 }
+
+
+

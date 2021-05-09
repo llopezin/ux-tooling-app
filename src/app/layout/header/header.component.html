@@ -1,12 +1,15 @@
 <header class="[ gradient-border ]">
 
-    <div class="[ max-w-screen-xl mx-auto pb-5 ]">
+    <div class="[ max-w-screen-xl mx-auto pb-5 relative ]">
+
         <div class="[ max-w-screen-lg mx-auto ]">
             <h1 class="[ heading__main ] [ py-6 ] [ text-center ]">Bucle App</h1>
         </div>
         
-        <a class="[ text-xl ]" routerLink="campaigns">Back to my campaigns</a>
-        <p></p>
+        <a class="[ back-link ] [ text-xl ]" *ngIf="!isCampaigns" routerLink="campaigns">My campaigns</a>
+        
+        <a class="[ absolute top-5 right-5 ] [ text-xl font-bold underline ]" routerLink="my-account">My Account</a>
+
     </div>
 
 </header>

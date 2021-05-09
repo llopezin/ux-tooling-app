@@ -13,13 +13,12 @@ import { getCampaigns, getWorkspace } from '../shared/store/workspace-store/work
 })
 export class CampaignComponent implements OnInit {
   id: number;
-  private sub: any;
   public campaign: Campaign;
 
   constructor(private route: ActivatedRoute, private store: Store<AppState>, private localStore: UserStoreService) { }
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.id = params['id'];
 
      

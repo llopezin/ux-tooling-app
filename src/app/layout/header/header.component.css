@@ -1,0 +1,4 @@
+.back-link::before{
+    content: '\2190';
+    margin-right: 10px;
+}

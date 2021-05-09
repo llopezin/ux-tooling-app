@@ -22,4 +22,4 @@ export const loginError = createAction(
     props<{ payload: any }>()
 );
 
-export const register = createAction('[User] register')
+/* export const register = createAction('[User] register') */

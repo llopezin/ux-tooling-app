@@ -91,4 +91,3 @@ export const getTasksError = createAction(
 
 
 
-export const register = createAction('[Workspace] register')

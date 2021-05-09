@@ -8,11 +8,11 @@
 
 /* Headings */
 .heading__main{
-    @apply text-5xl font-bold;
+    @apply  text-5xl font-bold;
 }
 
 .heading__secondary{
-    @apply text-2xl font-bold;
+    @apply  text-2xl font-bold;
 }
 
 
@@ -26,16 +26,20 @@
 }
 
 /* Buttons */
+.btn{
+  @apply  p-2  hover:bg-opacity-90  rounded-md shadow-md hover:shadow-xl;
+}
+
 .btn__text-color{
-    @apply  p-2 bg-text hover:bg-opacity-90 text-white rounded-md shadow-md;
+    @apply  p-2 bg-text hover:bg-opacity-90 text-white rounded-md shadow-md hover:shadow-xl;
 }
 
 .btn__primary-color{
-    @apply  p-2 bg-primary hover:bg-opacity-90 text-white rounded-md shadow-md;
+    @apply  p-2 bg-primary hover:bg-opacity-90 text-white rounded-md shadow-md hover:shadow-xl;
 }
 
 .btn__primary-light{
-    @apply  p-2 bg-primary-light hover:bg-opacity-90 rounded-md shadow-md;
+    @apply  p-2 bg-primary-light hover:bg-opacity-90 rounded-md shadow-md hover:shadow-xl;
 }
 
 .lozenge{

@@ -1,15 +1,21 @@
-<button class="[ btn__primary-color ] [ -mt-8 ] [ float-right ]" (click)="formOpened = !formOpened"
-    *ngIf="!formOpened">New campaign</button>
+<button class="[ -mt-8 ] [ float-right ]" [ngClass]="formOpened ? '' : 'btn__primary-color' " (click)="formOpened = !formOpened"
+  >{{formOpened? '×' : 'New campaign'}}</button>
+
 <form (ngSubmit)="onSubmit()" [formGroup]="newCampaignForm" *ngIf="formOpened">
 
     <div class="[ my-4 ]">
+
         <input class="[ input__primary ]" type="text" placeholder="campaign name" required name="name"
             formControlName="name" />
-        <div *ngIf="(newCampaignForm.get('name').dirty)">
+
+        <div *ngIf="newCampaignForm.get('name').touched">
             <div *ngIf="newCampaignForm.get('name').errors?.required">Name is required</div>
         </div>
+
     </div>
+
     <div class="[ flex justify-end ]">
         <button class="[ btn__primary-color ]" type="submit">Create campaign</button>
     </div>
+
 </form>

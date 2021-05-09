@@ -32,7 +32,8 @@ module.exports = {
         },
 
         fontFamily: {
-          'body': ['monospace'],
+          'body': ['Exo 2', 'sans-serif'],
+          'heading': ['monospace'],
          },
          
          gradientColorStops: theme => ({

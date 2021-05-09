@@ -1,4 +1,7 @@
-<h1 class="[ heading__main ]">{{task?.name}}</h1>
-<app-complete-survey *ngIf="task?.type === 'Survey'" [task]="task"></app-complete-survey>
-<app-complete-tree-test *ngIf="task?.type === 'Tree test'"></app-complete-tree-test>
-<app-complete-card-sorting *ngIf="task?.type === 'Card sorting'"></app-complete-card-sorting>
+<div class="[ mt-12 ]">
+    
+    <app-complete-survey *ngIf="task?.type === 'Survey'" [task]="task"></app-complete-survey>
+    <app-complete-tree-test *ngIf="task?.type === 'Tree test'"></app-complete-tree-test>
+    <app-complete-card-sorting *ngIf="task?.type === 'Card sorting'"></app-complete-card-sorting>
+
+</div>

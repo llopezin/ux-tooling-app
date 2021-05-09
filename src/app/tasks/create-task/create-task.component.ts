@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
 import { Task } from 'src/app/campaign/models/task.model';
 import { Campaign } from 'src/app/dashboard/models/campaign.model';
-import { addTask } from 'src/app/shared/store/workspace-store/workspace.actions';
+import { addTask, getCampaigns, getWorkspace } from 'src/app/shared/store/workspace-store/workspace.actions';
 
 @Component({
   selector: 'app-create-task',
@@ -35,10 +35,23 @@ export class CreateTaskComponent implements OnInit {
     this.store.select('workspaceApp').subscribe(state => {
       if (state.loading) return
 
-      this.updateCampaign(state)
-      if (this.currentTaskIsPosted()) { this.taskPosting = false; this.taskPosted = true; this.navigateToCampaign() }
+      const workspace = state.workspace
+      const campaingsAreStored = workspace && workspace.campaigns
+
+      if (!workspace) { this.store.dispatch(getWorkspace()) }
+      if (!campaingsAreStored) {this.getCamapigns(workspace); return}
+      if (!this.campaign) this.campaign = this.findCampaign(state)
+      if (this.currentTaskIsPosted(state)) this.onTaskPosted()
 
     })
+  }
+
+  getCamapigns(workspace) {
+    this.store.dispatch(getCampaigns({ campaign_ids: workspace.campaign_ids }))
+  }
+
+  onTaskPosted(){
+    this.taskPosting = false; this.taskPosted = true; this.navigateToCampaign()
   }
 
   createForm() {
@@ -51,23 +64,26 @@ export class CreateTaskComponent implements OnInit {
 
   createSurvey({ questions }) {
     this.task = { ...this.newTaskForm.value, questions, responses: [] }
-
     this.store.dispatch(addTask({ task: this.task, campaign_id: this.campaign_id }))
-    
     this.taskPosting = true
   }
 
-  updateCampaign(state) {
-    this.campaign = state.workspace?.campaigns?.find(campaign => campaign._id == this.campaign_id)
+
+  findCampaign(state) {
+    const campaign = state.workspace.campaigns.find(campaign => campaign._id == this.campaign_id)
+    return campaign
   }
 
-  currentTaskIsPosted() {
-    if (!this.campaign || !this.campaign.tasks) return
+  currentTaskIsPosted(state) {
+    const storedCampaign = this.findCampaign(state)
+    this.campaign.user_task_ids = this.campaign?.user_task_ids || []
 
-    return this.campaign.tasks.some(task => task.name === this.task?.name)
+    const taskIsPosted = storedCampaign.user_task_ids.length > this.campaign?.user_task_ids?.length
+
+    return taskIsPosted
   }
 
-  navigateToCampaign() {  
+  navigateToCampaign() {
     this.router.navigate([`campaign/${this.campaign_id}`]);
   }
 }

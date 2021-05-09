@@ -5,7 +5,7 @@ import { UserService } from "../../services/user.service";
 import { Login } from "../../models/login";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { login, register } from "../../../shared/store/user-store/user.actions"
+import { login } from "../../../shared/store/user-store/user.actions"
 import { UserStoreService } from "src/app/shared/services/user-store.service";
 import { AppState } from "src/app/app.reducers";
 

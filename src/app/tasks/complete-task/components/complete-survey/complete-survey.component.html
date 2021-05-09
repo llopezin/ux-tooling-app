@@ -1,4 +1,4 @@
-<form class="[ px-14 pt-6 pb-10 my-8 ] [ bg-background ] [ rounded-lg shadow-2xl ]" action=""
+<form class="[ px-14 pt-6 pb-10 mb-12 mt-20 ] [ bg-background ] [ rounded-lg shadow-2xl ]" action=""
     [formGroup]="completedTaskForm">
 
 
@@ -40,5 +40,25 @@
 
 </form>
 
-<button (click)="onSubmit()">Submit</button>
-{{ completedTaskForm?.value | json }}
+<button class="[ btn gradient-bg w-full ] [ text-xl font-extrabold text-white ]" (click)="onSubmit()">Submit my answers</button>
+
+
+
+<div class="[ overlay__white ]" *ngIf="taskPosting || taskCompleted">
+    
+        
+    <div class="[ flex flex-col items-center ]" *ngIf="taskPosting && !taskCompleted">
+        <div  class="lds-facebook"><div></div><div></div><div></div></div>
+        <p class="[ text-4xl font-bold ]">Submiting your answers</p>
+    </div>
+
+    
+
+    <div class="[ flex flex-col items-center ]" *ngIf="taskCompleted">
+        <span class="[ text-6xl font-bold text-green-400 ]">✔</span>
+        <p class="[ text-4xl font-bold ]">Your answers have been submited</p>
+        <p class="[ text-4xl font-bold ]">Thanks for participating</p>
+    </div>
+
+
+</div>
