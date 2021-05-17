@@ -5,6 +5,8 @@ import { UserStoreService } from './shared/services/user-store.service';
 import { browserTokenLogin } from './shared/store/user-store/user.actions';
 import { User } from './user/models/user';
 import { NavigationEnd, Router } from '@angular/router';
+import { getWorkspace } from './shared/store/workspace-store/workspace.actions';
+import { UserService } from './user/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +24,7 @@ export class AppComponent implements OnInit {
   constructor(
     private userStoreService: UserStoreService,
     private store: Store<AppState>,
+    private userService: UserService,
     private router: Router
   ) { }
 
@@ -35,6 +38,7 @@ export class AppComponent implements OnInit {
       .select('usersApp').subscribe((res) => {
         this.userIsLoggedIn = res.userIsLoggedIn
         if (!this.userIsLoggedIn) this.checkLocalForLoginToken()
+        if(this.userIsLoggedIn) this.getWorkspace()
       })
   }
 
@@ -50,6 +54,12 @@ export class AppComponent implements OnInit {
         this.isCompleteTask = e.url.indexOf("/complete-task") > -1
       }
     });
+  }
+
+  getWorkspace() {
+    this.userService.getProfile().subscribe(() => {
+      this.store.dispatch(getWorkspace())
+    })
   }
 
 

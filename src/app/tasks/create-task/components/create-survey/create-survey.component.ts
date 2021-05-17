@@ -17,8 +17,6 @@ export class CreateSurveyComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm()
-    console.log(this.surveryQuestions.controls);
-
   }
 
   createForm() {

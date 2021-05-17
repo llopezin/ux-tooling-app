@@ -5,7 +5,9 @@ export interface Task{
     type: string,
     active: boolean,
     completed: boolean,
-    responses: {}[],
-    questions: {multipleChoice: Boolean, options: string, tags?: string, question: string, type: string}[],
+    responses?: {}[],
+    questions?: {multipleChoice: Boolean, options: string, tags?: string, question: string, type: string}[],
+    categories?: string[],
+    cards?: string[],
     results: object
 }

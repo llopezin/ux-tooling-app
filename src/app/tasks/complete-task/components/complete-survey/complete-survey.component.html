@@ -1,11 +1,11 @@
-<form class="[ px-14 pt-6 pb-10 mb-12 mt-20 ] [ bg-background ] [ rounded-lg shadow-2xl ]" action=""
+<form class="[ px-20 pt-10 pb-16 mb-12 mt-20 ] [ bg-background ] [ rounded-lg shadow-2xl ]" action=""
     [formGroup]="completedTaskForm">
 
 
 
     <div *ngFor="let question of task.questions; let i=index">
 
-        <h3>{{question.question}}</h3>
+        <h3 class="[ mt-8 ] [ text-xl font-bold ]">{{question.question}}</h3>
 
         <div *ngFor="let option of question?.options?.split(','); let optionIndex=index">
 

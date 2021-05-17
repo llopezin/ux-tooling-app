@@ -54,7 +54,7 @@
         <div>
 
             <app-create-survey (createSurvey)="createSurvey($event)" *ngIf="type.value === 'Survey'"></app-create-survey>
-            <app-create-card-sorting *ngIf="type.value === 'Card sorting'"></app-create-card-sorting>
+            <app-create-card-sorting (createCardSorting)="createCardSorting($event)" *ngIf="type.value === 'Card sorting'"></app-create-card-sorting>
             <app-create-tree-test *ngIf="type.value === 'Tree test'"></app-create-tree-test>
     
         </div>   

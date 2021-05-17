@@ -21,7 +21,7 @@
 
                 </div>
 
-                <div class="[ my-4 ]" *ngIf="item.value.options !== undefined">
+                <div class="[ my-4 ]" *ngIf="item.value.options?.length > 0">
 
                     <label [for]="'options'+ i">Options</label>
                     <input class="[ input__primary ]" type="text" placeholder="Type the options separated by commas"
@@ -38,7 +38,7 @@
 
                 </div>
 
-                <div class="[ my-4 ]" *ngIf="item.value.tags !== undefined">
+                <div class="[ my-4 ]" *ngIf="item.value.tags?.length > 0">
 
                     <label [for]="'tags'+ i">Tags</label>
                     <p>Tags are unique answers your question, users will only be able to pick one</p>
@@ -58,4 +58,4 @@
     
 </form>
 
-<button class="[ btn__primary-color w-full my-10  ]" type="submit" (click)="onSubmit()">update Task</button>
+<button class="[ btn__primary-color w-full my-10  ]" type="submit" (click)="onSubmit()">Update Task</button>

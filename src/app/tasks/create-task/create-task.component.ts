@@ -36,10 +36,10 @@ export class CreateTaskComponent implements OnInit {
       if (state.loading) return
 
       const workspace = state.workspace
-      const campaingsAreStored = workspace && workspace.campaigns
+      const campaingsAreStored = !!workspace?.campaigns
 
       if (!workspace) { this.store.dispatch(getWorkspace()) }
-      if (!campaingsAreStored) {this.getCamapigns(workspace); return}
+      if (!campaingsAreStored) { this.getCamapigns(workspace); return }
       if (!this.campaign) this.campaign = this.findCampaign(state)
       if (this.currentTaskIsPosted(state)) this.onTaskPosted()
 
@@ -50,7 +50,7 @@ export class CreateTaskComponent implements OnInit {
     this.store.dispatch(getCampaigns({ campaign_ids: workspace.campaign_ids }))
   }
 
-  onTaskPosted(){
+  onTaskPosted() {
     this.taskPosting = false; this.taskPosted = true; this.navigateToCampaign()
   }
 
@@ -64,6 +64,12 @@ export class CreateTaskComponent implements OnInit {
 
   createSurvey({ questions }) {
     this.task = { ...this.newTaskForm.value, questions, responses: [] }
+    this.store.dispatch(addTask({ task: this.task, campaign_id: this.campaign_id }))
+    this.taskPosting = true
+  }
+  
+  createCardSorting({instructions, cards, categories}) {
+    this.task = { ...this.newTaskForm.value, instructions, cards, categories, responses: [] }
     this.store.dispatch(addTask({ task: this.task, campaign_id: this.campaign_id }))
     this.taskPosting = true
   }

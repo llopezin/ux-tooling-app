@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../../../user/services/user.service';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { UserStoreService } from 'src/app/shared/services/user-store.service';
-import { AppState } from 'src/app/app.reducers';
 import { MyAccountService } from '../../services/my-account.service';
 
 @Component({

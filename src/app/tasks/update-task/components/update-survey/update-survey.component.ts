@@ -14,10 +14,10 @@ export class UpdateSurveyComponent implements OnInit {
   public newSurveyForm: FormGroup;
   @Output() updateSurvey: EventEmitter<any> = new EventEmitter();
   @Input() task: Task
-
+  
   constructor(private fb: FormBuilder, private store: Store<AppState>) {
   }
-
+  
   ngOnInit(): void {
     this.updateForm()
   }
@@ -47,12 +47,13 @@ export class UpdateSurveyComponent implements OnInit {
 
   currentQuestions() {
 
-    return this.task.questions.map(({ question, type, options, multipleChoice }) => {
+    return this.task.questions.map(({ question, type, options, multipleChoice, tags }) => {
 
       return this.fb.group({
         question: [question, [Validators.required]],
         type: [type],
         options: [options, [Validators.required]],
+        tags: [tags, [Validators.required]],
         multipleChoice: [multipleChoice],
 
       })
@@ -79,8 +80,7 @@ export class UpdateSurveyComponent implements OnInit {
   }
 
   onSubmit() {
-    if (!this.newSurveyForm.valid) return
-    this.updateSurvey.emit(this.newSurveyForm.value)
+     this.updateSurvey.emit(this.newSurveyForm.value)
   }
 
   get surveryQuestions() {
