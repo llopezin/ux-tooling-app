@@ -16,6 +16,7 @@ import { UsersEffects } from './shared/store/user-store/user.effects';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { appReducers } from './app.reducers';
 import {WorkspaceEffects} from './shared/store/workspace-store/workspace.effects';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {WorkspaceEffects} from './shared/store/workspace-store/workspace.effects
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
-    EffectsModule.forRoot([UsersEffects, WorkspaceEffects]), 
+    EffectsModule.forRoot([UsersEffects, WorkspaceEffects]),
+    BrowserAnimationsModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]

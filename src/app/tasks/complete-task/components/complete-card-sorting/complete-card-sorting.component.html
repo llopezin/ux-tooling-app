@@ -1,1 +1,29 @@
 <p>complete-card-sorting works!</p>
+
+<p *ngFor="let category of task.categories">{{category}}</p>
+
+<div class="example-parent">
+    <h1>To-do list</h1>
+    <div class="example-origin">
+      To-do
+      <div
+        id="draggable-1"
+        class="example-draggable"
+        draggable="true"
+        (dragstart)="onDragStart($event);"
+      >
+        thing 1
+      </div>
+     
+  
+   
+    </div>
+  
+    <div
+      class="example-dropzone"
+      (dragover)="onDragOver($event)"
+      ondrop="onDrop(event);"
+    >
+      Done
+    </div>
+  </div>

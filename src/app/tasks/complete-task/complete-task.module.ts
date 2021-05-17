@@ -6,13 +6,14 @@ import { CompleteCardSortingComponent } from './components/complete-card-sorting
 import { CompleteTaskComponent } from './complete-task.component';
 import { CompleteTaskRoutingModule } from './complete-task-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { DragDropModule} from '@angular/cdk/drag-drop';
 
 
 
 @NgModule({
   declarations: [CompleteSurveyComponent, CompleteTreeTestComponent, CompleteCardSortingComponent, CompleteTaskComponent],
   imports: [
-    CommonModule, CompleteTaskRoutingModule,  FormsModule, ReactiveFormsModule,
+    CommonModule, CompleteTaskRoutingModule,  FormsModule, ReactiveFormsModule
   ]
 })
 export class CompleteTaskModule { }

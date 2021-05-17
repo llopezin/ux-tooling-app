@@ -70,6 +70,7 @@ export class CreateTaskComponent implements OnInit {
   
   createCardSorting({instructions, cards, categories}) {
     this.task = { ...this.newTaskForm.value, instructions, cards, categories, responses: [] }
+
     this.store.dispatch(addTask({ task: this.task, campaign_id: this.campaign_id }))
     this.taskPosting = true
   }
