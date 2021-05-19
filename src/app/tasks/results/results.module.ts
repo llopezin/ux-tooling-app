@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ResultsComponent } from './results.component';
 import { ResultsRoutingModule } from './results-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SurveyComponent } from './survey/survey.component';
 
 
 
 @NgModule({
-  declarations: [ResultsComponent],
+  declarations: [SurveyComponent],
   imports: [
     CommonModule, ResultsRoutingModule, ReactiveFormsModule, FormsModule
   ]

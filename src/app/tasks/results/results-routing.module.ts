@@ -2,10 +2,10 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { NgModule } from "@angular/core";
 import { AuthGuardService } from "src/app/shared/guards/auth-guard.service";
-import { ResultsComponent } from "./results.component";
+import { SurveyComponent } from "./survey/survey.component";
 
 const routes: Routes = [
-{ path: '', component: ResultsComponent, canActivate: [AuthGuardService] },
+{ path: 'Survey', component: SurveyComponent, canActivate: [AuthGuardService] },
 ];
 
 @NgModule({

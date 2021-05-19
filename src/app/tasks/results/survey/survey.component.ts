@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Task } from 'src/app/campaign/models/task.model';
-import { CompleteTaskService } from '../complete-task/services/complete-task.service';
+import { CompleteTaskService } from '../../complete-task/services/complete-task.service';
 import { Chart, registerables } from 'chart.js';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-results',
-  templateUrl: './results.component.html',
-  styleUrls: ['./results.component.css']
+  selector: 'app-survey',
+  templateUrl: './survey.component.html',
+  styleUrls: ['./survey.component.css']
 })
-export class ResultsComponent implements OnInit {
+export class SurveyComponent implements OnInit {
 
   public task: Task;
   public task_id: string;
@@ -73,17 +73,17 @@ export class ResultsComponent implements OnInit {
     const options = question.options ? question.options.split(',') : question.tags.split(',')
     const responses = this.task.responses.map(response => response[questionText]).filter(r => r).flat()
     const data = []
-    
+
     options.forEach(option => {
       data.push(responses.filter(response => response === option).length)
     });
-    
+
     return data
   }
 
   changeChart(i) {
     const currentChart = this.charts[i]
-    
+
     currentChart.destroy()
 
     const question = this.task.questions[i];
@@ -111,6 +111,8 @@ export class ResultsComponent implements OnInit {
       'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + '0.6' + ')'
     );
   }
+
+
 
 
 }
