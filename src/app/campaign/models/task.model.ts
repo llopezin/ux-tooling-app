@@ -9,5 +9,6 @@ export interface Task{
     questions?: {multipleChoice: Boolean, options: string, tags?: string, question: string, type: string}[],
     categories?: string[],
     cards?: string[],
+    instructions?: string,
     results: object
 }

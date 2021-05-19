@@ -1,29 +1,46 @@
-<p>complete-card-sorting works!</p>
+<p class="[ my-6 ]">{{task.instructions}}:</p>
 
-<p *ngFor="let category of task.categories">{{category}}</p>
 
-<div class="example-parent">
-    <h1>To-do list</h1>
-    <div class="example-origin">
-      To-do
-      <div
-        id="draggable-1"
-        class="example-draggable"
-        draggable="true"
-        (dragstart)="onDragStart($event);"
-      >
-        thing 1
-      </div>
-     
+<div class="[ flex ] [ card ] [ cursor-pointer ]" *ngFor="let card of task.cards; let i = index" [id]="i" draggable="true"
+  (dragstart)="onDragStart($event);">
+  {{card}}
+</div>
+
+
+<table class="[ w-full mt-6 ] [ bg-background ]">
+
+  <tr *ngFor="let category of task.categories">
+ 
+    <th class="[ h-48 p-3 ] [ bg-primary ] [ border-4 border-white border-b-0 ]">
+      {{category}}
+    </th>
+ 
+    <td class="[ w-4/5 ] [ align-top ] [ border-4 border-white border-t ]" [id]="category"
+      (dragover)="onDragOver($event)" (drop)="onDrop($event);">
+      <div class="[ drag ]"></div>
+    </td>
+ 
+  </tr>
+
+</table>
+
+
+<button class="[ btn gradient-bg w-full my-12 px-8 ] [ text-xl font-extrabold text-text ]" (click)="onSubmit()">Submit my answers</button>
+
+
+
+<div class="[ overlay__white ]" *ngIf="taskPosting || taskCompleted">
+    
+        
+  <div class="[ flex flex-col items-center ]" *ngIf="taskPosting && !taskCompleted">
+      <div  class="lds-facebook"><div></div><div></div><div></div></div>
+      <p class="[ text-4xl font-bold ]">Submiting your answers</p>
+  </div>
+
   
-   
-    </div>
-  
-    <div
-      class="example-dropzone"
-      (dragover)="onDragOver($event)"
-      ondrop="onDrop(event);"
-    >
-      Done
-    </div>
+
+  <div class="[ flex flex-col items-center ]" *ngIf="taskCompleted">
+      <span class="[ text-6xl font-bold text-green-400 ]">✔</span>
+      <p class="[ text-4xl font-bold ]">Your answers have been submited</p>
+      <p class="[ text-4xl font-bold ]">Thanks for participating</p>
   </div>
