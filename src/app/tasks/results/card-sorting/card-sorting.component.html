@@ -1,0 +1,33 @@
+<h2 class="[ heading__secondary mt-12 ]" >{{task.name}}</h2>
+
+<p class="[ my-3 ]">How many of your users sorted each card per category:</p>
+
+<div class="[ max-w-screen-lg mx-auto my-8 ]">
+    <canvas id="chart"></canvas>
+</div>
+
+
+<p class="[ my-3 ]">Spread percentages:</p>
+
+<table class="[ w-full mt-6 ] [ bg-background ]">
+
+    <tr *ngFor="let category of result | keyvalue">
+
+        <th class="[ p-3 ] [ bg-primary ] [ border-4 border-white border-b-0 ]">
+            {{category.key}}
+        </th>
+
+        <td class="[ w-4/5 ] [ align-top ] [ border-4 border-white border-t ]">
+            <div class="[ flex ] [ bg-background ]">
+                  
+                <div class="[ p-3 m-3 ] [ bg-white ] [ border border-primary rounded-md ]" *ngFor="let card of category.value | keyvalue" [style.display]="'none'">
+                    <p>{{card.key}} {{getPercentage(card.value)}}%</p>
+                </div>
+
+            </div>
+        </td>
+
+    </tr>
+
+</table>
+
