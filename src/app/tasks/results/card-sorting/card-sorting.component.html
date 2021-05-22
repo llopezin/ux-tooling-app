@@ -1,33 +1,75 @@
-<h2 class="[ heading__secondary mt-12 ]" >{{task.name}}</h2>
+<h2 class="[ heading__secondary mt-12 ]">{{task.name}}</h2>
 
-<p class="[ my-3 ]">How many of your users sorted each card per category:</p>
 
-<div class="[ max-w-screen-lg mx-auto my-8 ]">
-    <canvas id="chart"></canvas>
+<div class="[ my-10 ]">
+
+    <p class="[ my-3 ] [ text-lg font-bold ]">What percentage of users added each card per category:</p>
+
+
+    <table class="[ w-full mt-6 ] [ bg-background ]">
+
+        <tr *ngFor="let category of result | keyvalue">
+
+            <th class="[ p-3 ] [ bg-primary ] [ border-4 border-white border-b-0 ]">
+                {{category.key}}
+            </th>
+
+            <td class="[ w-4/5 ] [ align-top ] [ border-4 border-white border-t ]">
+                <div class="[ flex flex-row-reverse justify-end flex-wrap-reverse ] [ bg-background ]">
+
+                    <div class="[ p-3 m-3 ] [ bg-white ] [ border border-primary rounded-md ]"
+                        *ngFor="let card of category.value | keyvalue" [style.order]="card.value">
+                        <p>{{card.key}} {{getPercentage(card.value)}}%</p>
+                    </div>
+
+                </div>
+            </td>
+
+        </tr>
+
+    </table>
+
 </div>
 
 
-<p class="[ my-3 ]">Spread percentages:</p>
+<div class="[ my-10 ]">
 
-<table class="[ w-full mt-6 ] [ bg-background ]">
+    <p class="[ my-3 ]  [ text-lg font-bold ]">Ideal distribution according to your users choices:</p>
 
-    <tr *ngFor="let category of result | keyvalue">
 
-        <th class="[ p-3 ] [ bg-primary ] [ border-4 border-white border-b-0 ]">
-            {{category.key}}
-        </th>
+    <table class="[ w-full mt-6 mb-12 ] [ bg-background ]">
 
-        <td class="[ w-4/5 ] [ align-top ] [ border-4 border-white border-t ]">
-            <div class="[ flex ] [ bg-background ]">
-                  
-                <div class="[ p-3 m-3 ] [ bg-white ] [ border border-primary rounded-md ]" *ngFor="let card of category.value | keyvalue" [style.display]="'none'">
-                    <p>{{card.key}} {{getPercentage(card.value)}}%</p>
+        <tr *ngFor="let category of result | keyvalue">
+
+            <th class="[ p-3 ] [ bg-primary ] [ border-4 border-white border-b-0 ]">
+                {{category.key}}
+            </th>
+
+            <td class="[ w-4/5 ] [ align-top ] [ border-4 border-white border-t ]">
+                <div class="[ flex flex-row-reverse justify-end ] [ bg-background ]">
+
+                    <div *ngFor="let card of category.value | keyvalue" [style.order]="card.value">
+                        <div class="[ p-3 m-3 ] [ bg-white ] [ border border-primary rounded-md ]"
+                            *ngIf="getPercentage(card.value) >=50">
+                            <p>{{card.key}}</p>
+                        </div>
+                    </div>
+
                 </div>
+            </td>
 
-            </div>
-        </td>
+        </tr>
 
-    </tr>
+    </table>
+</div>
 
-</table>
 
+<div class="[ my-10 ]">
+
+    <p class="[ my-3 ] [ text-lg font-bold ]">How many of your users sorted each card per category:</p>
+
+    <div class="[ max-w-screen-lg mx-auto my-8 ]">
+        <canvas id="chart"></canvas>
+    </div>
+
+</div>

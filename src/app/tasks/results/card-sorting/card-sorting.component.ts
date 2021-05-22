@@ -78,7 +78,7 @@ export class CardSortingComponent implements OnInit {
 
   buildDatasets() {
     const datasets = []
-    const newDataset = (label, data, backgroundColor) => ({ label, data, backgroundColor, grouped: true, skipNull: true, barThickness: 30, borderColor: "transparent", borderWidth: 2 })
+    const newDataset = (label, data, backgroundColor) => ({ label, data, backgroundColor, grouped: true, skipNull: true, borderColor: "transparent", borderWidth: 2 })
 
     this.task.cards.forEach(card => {
       const data = []

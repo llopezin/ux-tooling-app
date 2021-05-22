@@ -1,0 +1,7 @@
+.tt__heading{
+    @apply p-3 bg-white border border-primary border-t-0
+}
+
+.tt__button { 
+    @apply float-right -mt-1
+}
