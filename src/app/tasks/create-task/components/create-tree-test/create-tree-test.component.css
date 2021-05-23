@@ -1,7 +1,32 @@
-.tt__heading{
-    @apply p-3 bg-white border border-primary border-t-0
+.tt__heading { 
+    @apply flex flex-grow items-center ml-2 text-xl
+} 
+
+.tt__item  {
+    @apply flex p-3 bg-white border border-primary border-t-0 capitalize 
 }
 
-.tt__button { 
-    @apply float-right -mt-1
+.tt__button {
+    @apply mx-2 relative outline-none hover:bg-opacity-50 py-0 text-text capitalize
+}
+
+.tt__button::before{
+    content: "+";
+    @apply text-xl mx-1 font-semibold
+}
+
+.selected {
+    @apply shadow-lg border-4 z-10
+}
+
+.tt__button--remove {
+   font-size: 0; 
+   margin-top: 3px;
+}
+
+.tt__button--remove::after {
+    content: "\00D7";
+    line-height: 2rem;
+    vertical-align: middle;
+    @apply  mx-2 text-4xl text-red-800 font-bold 
 }

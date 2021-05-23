@@ -1,39 +1,69 @@
-<div class="[ p-14 my-8 ] [ bg-background ] [ rounded-lg shadow-2xl ]">
+<div class="[ p-14 mt-8  mb-10 ] [ bg-background ] [ rounded-lg shadow-2xl ]">
+
+
+    <h3 class="[ heading__secondary ] [ mb-8 ]">Your tree</h3>
+
+
+    <form [formGroup]="treeTestForm" *ngIf="inputOpened">
+
+
+        <div #mainInput class="[ my-8 flex ]">
+
+            <label class="[ hidden ]" for="heading">heading</label>
+            <input class="[ input__primary ]" type="text" placeholder="Type tree item" name="heading"
+                formControlName="heading" id="heading" />
+
+            <button class="[ btn__primary-color mx-3 ]" (click)="add()">add</button>
+
+        </div>
+
+
+    </form>
+
+
 
 
     <div id="headings">
 
-        <div *ngFor="let level1 of headings | keyvalue : order" [id]="level1.key">
-            <div>
+        <div class="[ border-t border-primary mt-1 ]" *ngFor="let level1 of headings | keyvalue : order; let i = index"
+            [id]="level1.key">
+            <div class="[ tt__item ]">
                 <div class="[ tt__heading ]">{{level1.key}}</div>
-                <button class="[ tt__button ]" (click)="addSibling($event, mainInput)">Add as sibling</button>
-                <button class="[ tt__button ]" (click)="addChild($event, mainInput)">Add as child</button>
+                <button class="[ tt__button--remove ]" (click)="remove($event)">remove</button>
+                <button class="[ tt__button btn__primary-color ]" (click)="addChild($event, mainInput)">child</button>
+                <button class="[ tt__button btn__primary-light ]" *ngIf="i===0"
+                    (click)="addSibling($event, mainInput)">category</button>
             </div>
 
-            <div class="[ ml-4 ]" *ngFor="let level2 of level1.value | keyvalue : order" [id]="level2.key">
-                <div>
+            <div class="[ ml-8 ]" *ngFor="let level2 of level1.value | keyvalue : order; let i = index" [id]="level2.key">
+                <div class="[ tt__item ]">
                     <div class="[ tt__heading ]">{{level2.key}}</div>
-                    <button class="[ tt__button ]" (click)="addSibling($event, mainInput)">Add as sibling</button>
-                    <button class="[ tt__button ]" (click)="addChild($event, mainInput)">Add as child</button>
+                    <button class="[ tt__button--remove ]" (click)="remove($event)">remove</button>
+                    <button class="[ tt__button btn__primary-color ]"
+                        (click)="addChild($event, mainInput)" title="add child"></button>
                 </div>
-
-                <div class="[ ml-6 ]" *ngFor="let level3 of level2.value | keyvalue : order" [id]="level3.key">
-                    <div>
+                
+                <div class="[ ml-16 ]" *ngFor="let level3 of level2.value | keyvalue : order; let i = index" [id]="level3.key">
+                    <div class="[ tt__item ]">
                         <div class="[ tt__heading ]">{{level3.key}}</div>
-                        <button class="[ tt__button ]" (click)="addSibling($event, mainInput)">Add as sibling</button>
-                        <button class="[ tt__button ]" (click)="addChild($event, mainInput)">Add as child</button>
+                        <button class="[ tt__button--remove ]" (click)="remove($event)">remove</button>
+                        <button class="[ tt__button btn__primary-color ]" 
+                        (click)="addChild($event, mainInput)" title="add child"></button>
                     </div>
-
-                    <div class="[ ml-9 ]" *ngFor="let level4 of level3.value | keyvalue : order" [id]="level4.key">
-                        <div>
+                    
+                    <div class="[ ml-24 ]" *ngFor="let level4 of level3.value | keyvalue : order; let i = index" [id]="level4.key">
+                        <div class="[ tt__item ]">
                             <div class="[ tt__heading ]">{{level4.key}}</div>
-                            <button class="[ tt__button ]" (click)="addSibling($event, mainInput)">Add as
-                                sibling</button>
-                            <button class="[ tt__button ]" (click)="addChild($event, mainInput)">Add as child</button>
+                            <button class="[ tt__button--remove ]" (click)="remove($event)">remove</button>
+                            <button class="[ tt__button btn__primary-color ]"
+                            (click)="addChild($event, mainInput)" title="add child"></button>
                         </div>
-
-                        <div class="[ ml-12 ]" *ngFor="let level5 of level4.value | keyvalue : order" [id]="level5.key">
-                            <div class="[ tt__heading ]">{{level5.key}}</div>
+                        
+                        <div class="[ ml-32 ]" *ngFor="let level5 of level4.value | keyvalue : order; let i = index" [id]="level5.key">
+                            <div class="[ tt__item ]">
+                                <div class="[ tt__heading ]">{{level5.key}}</div>
+                                <button class="[ tt__button--remove ]" (click)="remove($event)">remove</button>
+                            </div>
                         </div>
 
                     </div>
@@ -45,24 +75,5 @@
         </div>
 
     </div>
-
-
-    <form [formGroup]="treeTestForm" *ngIf="inputOpened">
-
-
-        <div #mainInput class="[ my-4 ]">
-
-            <label class="[ hidden ]" for="heading">heading</label>
-            <input class="[ input__primary ]" type="text" placeholder="Write your heading" name="heading"
-                formControlName="heading" id="heading" />
-
-            <button class="[ btn__primary-color ]" (click)="add()">Add</button>
-
-        </div>
-
-
-    </form>
-
-    {{headings | json}}
 
 </div>

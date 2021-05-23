@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -9,8 +10,8 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class CreateTreeTestComponent implements OnInit {
 
   public treeTestForm: FormGroup;
-  public headings: any = { zapatos: { deportivas: {}, tacones: {} }, ropa: { camisetas: {}, pantalones: { cortos: {}, largos: {} } } };
-  public inputOpened: boolean = false
+  public headings: any = {};
+  public inputOpened: boolean = true
   public selectedParent: any;
   @ViewChild("mainInput") mainInput: ElementRef;
 
@@ -19,7 +20,7 @@ export class CreateTreeTestComponent implements OnInit {
   ngOnInit(): void {
     this.createForm()
   }
-  
+
   order(a, b) {
     return 1;
   }
@@ -40,20 +41,54 @@ export class CreateTreeTestComponent implements OnInit {
   addSibling(e, target) {
     this.inputOpened = true
     let parent = e.target.parentElement.parentElement.parentElement
-    
-    this.addToParent(parent)
+
+    this.findDataParent(parent)
     target?.nativeElement.scrollIntoView()
+    this.mark(e.target.parentElement)
   }
-  
+
   addChild(e, target) {
     this.inputOpened = true
     let parent = e.target.parentElement.parentElement
-    
-    this.addToParent(parent)
+
+    this.findDataParent(parent)
     target?.nativeElement.scrollIntoView()
+    this.mark(e.target.parentElement)
   }
 
-  addToParent(parent) {
+  mark(node) {
+    node?.classList.add("selected")
+  }
+
+  unmark() {
+    let selected = document.querySelector(".selected")
+    selected?.classList.remove("selected")
+  }
+
+  remove(e) {
+    let parent = e.target.parentElement.parentElement.parentElement
+    let elem = e.target.parentElement.parentElement.id
+    let path = this.findPath(parent)
+
+
+    let dataParent = this.headings
+    path.forEach(childHeading => {
+      dataParent = dataParent[childHeading]
+    })
+
+    delete dataParent[elem]
+
+    if(!this.headings.keys) {this.inputOpened = true; this.selectedParent = {}}
+  }
+
+  findDataParent(parent) {
+    let dataParent = this.headings
+
+    this.findPath(parent).forEach(childHeading => { dataParent = dataParent[childHeading] })
+    this.selectedParent = dataParent
+  }
+
+  findPath(parent) {
     const path = []
 
     while (parent.id != "headings") {
@@ -61,19 +96,18 @@ export class CreateTreeTestComponent implements OnInit {
       parent = parent.parentElement
     }
 
-    let dataParent = this.headings
-    let pathReversed = path.reverse()
-    
-    pathReversed.forEach(childHeading => { dataParent = dataParent[childHeading] })
-    this.selectedParent = dataParent
-
-
+    return path.reverse()
   }
-  
-  add(){
+
+  add() {
     let name = this.treeTestForm.value.heading
+    if (!this.selectedParent || !this.selectedParent.keys) this.selectedParent = this.headings
     this.selectedParent[name] = {}
+    this.inputOpened = false
+    this.unmark()
   }
+
+
 
 
 }

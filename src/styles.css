@@ -8,11 +8,11 @@
 
 /* Headings */
 .heading__main{
-    @apply  text-5xl font-bold;
+    @apply  text-5xl font-bold font-heading;
 }
 
 .heading__secondary{
-    @apply  text-2xl font-bold;
+    @apply  text-2xl font-bold font-heading;
 }
 
 
