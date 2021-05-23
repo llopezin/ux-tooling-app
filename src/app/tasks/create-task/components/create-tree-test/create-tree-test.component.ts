@@ -11,6 +11,8 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class CreateTreeTestComponent implements OnInit {
 
   public treeTestForm: FormGroup;
+  public treeTestTasksForm: FormGroup;
+  public treeCompleted: boolean = false;
   public headings: any = {};
   public inputOpened: boolean = true
   public selectedParent: any;
@@ -20,7 +22,8 @@ export class CreateTreeTestComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.createForm()
+    this.createHeadingsForm()
+    this.createTasksForm()
   }
 
   order(a, b) {
@@ -33,11 +36,30 @@ export class CreateTreeTestComponent implements OnInit {
     this.inputOpened = false
   }
 
-  createForm() {
+  createHeadingsForm() {
     this.treeTestForm = this.fb.group({
-      heading: [""]
+      heading: [""],
     }
     );
+  }
+
+  createTasksForm() {
+    this.treeTestTasksForm = this.fb.group({
+      instructions: [""],
+      tasks: this.fb.array([this.newTask()])
+    }
+    );
+  }
+
+  addTask(){
+    this.treeTasks.push(this.newTask())
+  }
+
+  newTask(): FormGroup {
+    return this.fb.group({
+      task: ["", [Validators.required]],
+      answer: ["", [Validators.required]],
+    });
   }
 
   addSibling(e, target) {
@@ -47,6 +69,7 @@ export class CreateTreeTestComponent implements OnInit {
     this.findDataParent(parent)
     target?.nativeElement.scrollIntoView()
     this.mark(e.target.parentElement)
+    this.treeTestForm.reset()
   }
 
   addChild(e, target) {
@@ -56,6 +79,7 @@ export class CreateTreeTestComponent implements OnInit {
     this.findDataParent(parent)
     target?.nativeElement.scrollIntoView()
     this.mark(e.target.parentElement)
+    this.treeTestForm.reset()
   }
 
   mark(node) {
@@ -115,8 +139,12 @@ export class CreateTreeTestComponent implements OnInit {
     this.unmark()
   }
 
-  createTask(){
+  createTask() {
     this.createTreetest.emit(this.headings)
+  }
+
+  get treeTasks() {
+    return this.treeTestTasksForm.get('tasks') as FormArray;
   }
 
 

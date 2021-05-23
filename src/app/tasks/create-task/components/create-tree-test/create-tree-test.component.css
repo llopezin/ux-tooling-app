@@ -30,3 +30,7 @@
     vertical-align: middle;
     @apply  mx-2 text-4xl text-red-800 font-bold 
 }
+
+label {
+    @apply text-lg font-bold
+}
