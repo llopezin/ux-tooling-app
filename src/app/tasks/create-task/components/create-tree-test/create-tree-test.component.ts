@@ -1,6 +1,7 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-create-tree-test',
@@ -14,6 +15,7 @@ export class CreateTreeTestComponent implements OnInit {
   public inputOpened: boolean = true
   public selectedParent: any;
   @ViewChild("mainInput") mainInput: ElementRef;
+  @Output() createTreetest: EventEmitter<any> = new EventEmitter
 
   constructor(private fb: FormBuilder) { }
 
@@ -78,7 +80,13 @@ export class CreateTreeTestComponent implements OnInit {
 
     delete dataParent[elem]
 
-    if(!this.headings.keys) {this.inputOpened = true; this.selectedParent = {}}
+    if (Object.keys(this.headings).length === 0) this.reset()
+  }
+
+  reset() {
+    this.inputOpened = true
+    this.selectedParent = this.headings
+    this.treeTestForm.reset()
   }
 
   findDataParent(parent) {
@@ -101,13 +109,15 @@ export class CreateTreeTestComponent implements OnInit {
 
   add() {
     let name = this.treeTestForm.value.heading
-    if (!this.selectedParent || !this.selectedParent.keys) this.selectedParent = this.headings
+    if (!this.selectedParent) this.selectedParent = this.headings
     this.selectedParent[name] = {}
     this.inputOpened = false
     this.unmark()
   }
 
-
+  createTask(){
+    this.createTreetest.emit(this.headings)
+  }
 
 
 }

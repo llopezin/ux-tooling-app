@@ -3,7 +3,6 @@
 
     <h3 class="[ heading__secondary ] [ mb-8 ]">Your tree</h3>
 
-
     <form [formGroup]="treeTestForm" *ngIf="inputOpened">
 
 
@@ -29,37 +28,42 @@
             [id]="level1.key">
             <div class="[ tt__item ]">
                 <div class="[ tt__heading ]">{{level1.key}}</div>
-                <button class="[ tt__button--remove ]" (click)="remove($event)">remove</button>
-                <button class="[ tt__button btn__primary-color ]" (click)="addChild($event, mainInput)">child</button>
                 <button class="[ tt__button btn__primary-light ]" *ngIf="i===0"
                     (click)="addSibling($event, mainInput)">category</button>
+                <button class="[ tt__button btn__primary-color ]" (click)="addChild($event, mainInput)">{{i === 0 ?
+                    "child" : ""}}</button>
+                <button class="[ tt__button--remove ]" (click)="remove($event)">remove</button>
             </div>
 
-            <div class="[ ml-8 ]" *ngFor="let level2 of level1.value | keyvalue : order; let i = index" [id]="level2.key">
+            <div class="[ ml-8 ]" *ngFor="let level2 of level1.value | keyvalue : order; let i = index"
+                [id]="level2.key">
                 <div class="[ tt__item ]">
                     <div class="[ tt__heading ]">{{level2.key}}</div>
+                    <button class="[ tt__button btn__primary-color ]" (click)="addChild($event, mainInput)"
+                        title="add child"></button>
                     <button class="[ tt__button--remove ]" (click)="remove($event)">remove</button>
-                    <button class="[ tt__button btn__primary-color ]"
-                        (click)="addChild($event, mainInput)" title="add child"></button>
                 </div>
-                
-                <div class="[ ml-16 ]" *ngFor="let level3 of level2.value | keyvalue : order; let i = index" [id]="level3.key">
+
+                <div class="[ ml-16 ]" *ngFor="let level3 of level2.value | keyvalue : order; let i = index"
+                    [id]="level3.key">
                     <div class="[ tt__item ]">
                         <div class="[ tt__heading ]">{{level3.key}}</div>
+                        <button class="[ tt__button btn__primary-color ]" (click)="addChild($event, mainInput)"
+                            title="add child"></button>
                         <button class="[ tt__button--remove ]" (click)="remove($event)">remove</button>
-                        <button class="[ tt__button btn__primary-color ]" 
-                        (click)="addChild($event, mainInput)" title="add child"></button>
                     </div>
-                    
-                    <div class="[ ml-24 ]" *ngFor="let level4 of level3.value | keyvalue : order; let i = index" [id]="level4.key">
+
+                    <div class="[ ml-24 ]" *ngFor="let level4 of level3.value | keyvalue : order; let i = index"
+                        [id]="level4.key">
                         <div class="[ tt__item ]">
                             <div class="[ tt__heading ]">{{level4.key}}</div>
+                            <button class="[ tt__button btn__primary-color ]" (click)="addChild($event, mainInput)"
+                                title="add child"></button>
                             <button class="[ tt__button--remove ]" (click)="remove($event)">remove</button>
-                            <button class="[ tt__button btn__primary-color ]"
-                            (click)="addChild($event, mainInput)" title="add child"></button>
                         </div>
-                        
-                        <div class="[ ml-32 ]" *ngFor="let level5 of level4.value | keyvalue : order; let i = index" [id]="level5.key">
+
+                        <div class="[ ml-32 ]" *ngFor="let level5 of level4.value | keyvalue : order; let i = index"
+                            [id]="level5.key">
                             <div class="[ tt__item ]">
                                 <div class="[ tt__heading ]">{{level5.key}}</div>
                                 <button class="[ tt__button--remove ]" (click)="remove($event)">remove</button>
@@ -76,4 +80,8 @@
 
     </div>
 
+    <div *ngFor="let level1 of headings | keyvalue : order; let i = index">
+        <button (click)="createTask()" *ngIf="i===0" class="[ btn__primary-color w-full mt-10 ]">Create
+            Task</button>
+    </div>
 </div>
