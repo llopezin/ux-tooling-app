@@ -1,6 +1,7 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, ElementRef, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { treeHeadingValidator } from './validators/tree-heading.validator';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class CreateTreeTestComponent implements OnInit {
   public treeTestForm: FormGroup;
   public treeTestTasksForm: FormGroup;
   public treeCompleted: boolean = false;
-  public headings: any = {};
+  public headings: any = {  };
   public inputOpened: boolean = true
   public selectedParent: any;
   @ViewChild("mainInput") mainInput: ElementRef;
@@ -51,7 +52,7 @@ export class CreateTreeTestComponent implements OnInit {
     );
   }
 
-  addTask(){
+  addTask() {
     this.treeTasks.push(this.newTask())
   }
 
@@ -140,12 +141,15 @@ export class CreateTreeTestComponent implements OnInit {
   }
 
   createTask() {
-    this.createTreetest.emit(this.headings)
+    this.createTreetest.emit({ 
+      headings: this.headings,
+      instructions: this.treeTestTasksForm.value.instructions, 
+      tasks: this.treeTestTasksForm.value.tasks
+     })
   }
 
   get treeTasks() {
     return this.treeTestTasksForm.get('tasks') as FormArray;
   }
-
 
 }

@@ -1,34 +1,35 @@
 <div class="[ p-14 mt-8  mb-48 ] [ bg-background ] [ rounded-lg shadow-2xl ]">
 
-<div *ngIf="!treeCompleted">
-    
+    <div *ngIf="!treeCompleted">
+
         <h3 class="[ heading__secondary ] [ mb-3 ]">Your tree</h3>
-    
-        <p class="[ mb-8 ]">Add items to create your tree. Users will navigate through the tree to find an item of your choice.</p>
-    
+
+        <p class="[ mb-8 ]">Add items to create your tree. Users will navigate through the tree to find an item of your
+            choice.</p>
+
         <form [formGroup]="treeTestForm" *ngIf="inputOpened">
-    
-    
+
+
             <div #mainInput class="[ my-8 flex ]">
-    
+
                 <label class="[ hidden ]" for="heading">heading</label>
                 <input class="[ input__primary ]" type="text" placeholder="Type tree item" name="heading"
                     formControlName="heading" id="heading" />
-    
+
                 <button class="[ btn__primary-color mx-3 ]" (click)="add()">add</button>
-    
+
             </div>
-    
-    
+
+
         </form>
-    
-    
-    
-    
+
+
+
+
         <div id="headings">
-    
-            <div class="[ border-t border-primary mt-1 ]" *ngFor="let level1 of headings | keyvalue : order; let i = index"
-                [id]="level1.key">
+
+            <div class="[ border-t border-primary mt-1 ]"
+                *ngFor="let level1 of headings | keyvalue : order; let i = index" [id]="level1.key">
                 <div class="[ tt__item ]">
                     <div class="[ tt__heading ]">{{level1.key}}</div>
                     <button class="[ tt__button btn__primary-light ]" *ngIf="i===0"
@@ -37,7 +38,7 @@
                         "child" : ""}}</button>
                     <button class="[ tt__button--remove ]" (click)="remove($event)">remove</button>
                 </div>
-    
+
                 <div class="[ ml-8 ]" *ngFor="let level2 of level1.value | keyvalue : order; let i = index"
                     [id]="level2.key">
                     <div class="[ tt__item ]">
@@ -46,7 +47,7 @@
                             title="add child"></button>
                         <button class="[ tt__button--remove ]" (click)="remove($event)">remove</button>
                     </div>
-    
+
                     <div class="[ ml-16 ]" *ngFor="let level3 of level2.value | keyvalue : order; let i = index"
                         [id]="level3.key">
                         <div class="[ tt__item ]">
@@ -55,7 +56,7 @@
                                 title="add child"></button>
                             <button class="[ tt__button--remove ]" (click)="remove($event)">remove</button>
                         </div>
-    
+
                         <div class="[ ml-24 ]" *ngFor="let level4 of level3.value | keyvalue : order; let i = index"
                             [id]="level4.key">
                             <div class="[ tt__item ]">
@@ -64,7 +65,7 @@
                                     title="add child"></button>
                                 <button class="[ tt__button--remove ]" (click)="remove($event)">remove</button>
                             </div>
-    
+
                             <div class="[ ml-32 ]" *ngFor="let level5 of level4.value | keyvalue : order; let i = index"
                                 [id]="level5.key">
                                 <div class="[ tt__item ]">
@@ -72,69 +73,71 @@
                                     <button class="[ tt__button--remove ]" (click)="remove($event)">remove</button>
                                 </div>
                             </div>
-    
+
                         </div>
-    
+
                     </div>
-    
+
                 </div>
-    
+
             </div>
-    
+
         </div>
 
         <div *ngFor="let level1 of headings | keyvalue : order; let i = index">
-            <button (click)="treeCompleted = true" *ngIf="i===0" class="[ btn__primary-color w-full mt-10 ]">Create tree tasks</button>
+            <button (click)="treeCompleted = true" *ngIf="i===0" class="[ btn__primary-color w-full mt-10 ]">Create tree
+                tasks</button>
         </div>
 
-</div>
+    </div>
 
-<div *ngIf="treeCompleted">
+    <div *ngIf="treeCompleted">
 
-    <h3 class="[ heading__secondary ] [ mb-3  mt-4 ]">Tree tasks</h3>
+        <h3 class="[ heading__secondary ] [ mb-3  mt-4 ]">Tree tasks</h3>
 
-    <p class="[ mb-8 ]">Give your users a set of tasks to complete using your tree. Add some general instructions to set
-        an schenario, this will help your users get into hte mindset a real life situation.</p>
+        <p class="[ mb-8 ]">Give your users a set of tasks to complete using your tree. Add some general instructions to
+            set
+            an schenario, this will help your users get into hte mindset a real life situation.</p>
 
 
-    <form [formGroup]="treeTestTasksForm">
+        <form [formGroup]="treeTestTasksForm">
 
-        <label for="instructions">Instructions (optional)</label>
-        <textarea class="[ block w-full ]" id="instructions" rows="3" name="instructions"
-            formControlName="instructions"></textarea>
+            <label for="instructions">Instructions (optional)</label>
+            <textarea class="[ block w-full ]" id="instructions" rows="3" name="instructions"
+                formControlName="instructions"></textarea>
 
-        <div formArrayName="tasks">
+            <div formArrayName="tasks">
 
-            <div class="[ mb-16 ]" *ngFor="let task of treeTasks.controls; let i=index" [formGroupName]="i">
+                <div class="[ mb-16 ]" *ngFor="let task of treeTasks.controls; let i=index" [formGroupName]="i">
 
-                <div class="[ my-8 ]">
+                    <div class="[ my-8 ]">
 
-                    <label [for]="'task'+i">Task {{i + 1}}</label>
-                    <input class="[ input__primary ] [ mb-4 ]" type="text" placeholder="Task" name="heading"
-                        formControlName="task" [id]="'task'+i" />
+                        <label [for]="'task'+i">Task {{i + 1}}</label>
+                        <input class="[ input__primary ] [ mb-4 ]" type="text" placeholder="Task" name="heading"
+                            formControlName="task" [id]="'task'+i" />
 
-                    <label [for]="'answer'+i">Correct heading</label>
-                    <input class="[ input__primary ]" type="text" placeholder="Type the name of the correct heading"
-                        name="answer" formControlName="answer" [id]="'answer'+i" />
+                        <label [for]="'answer'+i">Correct heading</label>
+                        <input class="[ input__primary ]" type="text" placeholder="Type the name of the correct heading"
+                            name="answer" formControlName="answer" [id]="'answer'+i" />
+
+                    </div>
 
 
                 </div>
 
-
             </div>
 
+
+        </form>
+
+        <div class="[ flex justify-end ]">
+            <button class="[ btn__primary-light back-arrow ]" (click)="treeCompleted = false">Back to tree</button>
+            <button class="[ btn__primary-color mx-3 ]" (click)="addTask()">add task</button>
         </div>
 
 
-    </form>
+        <div>
 
-    <div class="[ flex justify-end ]">
-        <button class="[ btn__primary-color mx-3 ]" (click)="addTask()">add task</button>
-    </div>
+            <button class="[ btn__primary-color w-full mt-10 ]" *ngIf="treeTestTasksForm.valid" (click)="createTask()">Create Task</button>
 
-
-<div>
-
-    <button class="[ btn__primary-color w-full mt-10 ]" *ngIf="treeTestTasksForm.valid">Create Task</button>
-
-</div>
+        </div>

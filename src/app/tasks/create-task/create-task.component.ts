@@ -73,9 +73,9 @@ export class CreateTaskComponent implements OnInit {
   }
 
 
-  createTreetest(task) {
-    console.log('task:', task)
-
+  createTreetest({instructions, tasks, headings}) {
+    this.task = { ...this.newTaskForm.value, instructions, tasks, headings, responses: [] }
+    this.sendTask()
   }
 
   sendTask() {

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
+import {Task} from 'src/app/campaign/models/task.model';
 
 @Component({
   selector: 'app-complete-tree-test',
@@ -7,11 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompleteTreeTestComponent implements OnInit {
 
+  @Input() task: Task
+  
   constructor() { }
-
+  
   ngOnInit(): void {
-
+    
     console.log('complete tree taest component initialized');
+    console.log('task:', this.task)
     
   }
 
