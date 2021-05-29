@@ -59,7 +59,6 @@ export class CreateTreeTestComponent implements OnInit {
   newTask(): FormGroup {
     return this.fb.group({
       task: ["", [Validators.required]],
-      answer: ["", [Validators.required]],
     });
   }
 

@@ -1,1 +1,105 @@
-<p>complete-tree-test works!</p>
+<div class="[ p-14 mt-8  mb-48 ] [ bg-background ] [ rounded-lg shadow-2xl ]">
+
+    <h2 class="[ heading__secondary ]">Instructions</h2>
+    <p class="[ pb-8 ]">{{task.instructions}}</p>
+
+    <div *ngFor="let item of task.tasks; let taskIndex = index">
+        <h2 class="[ heading__secondary ]">{{ taskIndex + 1 }}. {{item.task}}</h2>
+
+
+
+        <div class="[ my-12 ]" id="headings">
+
+            <div class="[ level hideChildren ][ border-t border-primary mt-1 cursor-pointer ]"
+                *ngFor="let level1 of task.headings | keyvalue; let i = index" [id]="level1.key">
+
+
+                <div class="[ tt__item ]">
+                    <div (click)="changeChildrenDisplay($event)" class="[ tt__heading ]">{{level1.key}}</div>
+                    <button class="[ underlined color-contrast ]" (click)="selectItem($event)"
+                        [id]="taskIndex">select</button>
+
+                </div>
+
+                <div class="[ level hideChildren ][ ml-8 ]"
+                    *ngFor="let level2 of level1.value | keyvalue; let i = index" [id]="level2.key">
+                    <div class="[ tt__item ]">
+                        <div (click)="changeChildrenDisplay($event)" class="[ tt__heading ]">{{level2.key}}</div>
+                        <button class="[ underlined color-contrast ]" (click)="selectItem($event)"
+                            [id]="taskIndex">select</button>
+
+
+                    </div>
+
+                    <div class="[ level hideChildren ][ ml-16 ]"
+                        *ngFor="let level3 of level2.value | keyvalue; let i = index" [id]="level3.key">
+                        <div class="[ tt__item ]">
+                            <div (click)="changeChildrenDisplay($event)" class="[ tt__heading ]">{{level3.key}}</div>
+                            <button class="[ underlined color-contrast ]" (click)="selectItem($event)"
+                                [id]="taskIndex">select</button>
+
+
+                        </div>
+
+                        <div class="[ level hideChildren ][ ml-24 ]"
+                            *ngFor="let level4 of level3.value | keyvalue; let i = index" [id]="level4.key">
+                            <div class="[ tt__item ]">
+                                <div (click)="changeChildrenDisplay($event)" class="[ tt__heading ]">{{level4.key}}
+                                </div>
+                                <button class="[ underlined color-contrast ]" (click)="selectItem($event)"
+                                    [id]="taskIndex">select</button>
+
+
+                            </div>
+
+                            <div class="[ ml-32 ]" *ngFor="let level5 of level4.value | keyvalue; let i = index"
+                                [id]="level5.key">
+                                <div class="[ tt__item ]">
+                                    <div class="[ tt__heading ]">{{level5.key}}</div>
+                                    <button class="[ underlined color-contrast ]" (click)="selectItem($event)"
+                                        [id]="taskIndex">select</button>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <button class="[ btn gradient-bg w-full ] [ text-xl font-extrabold text-white ]" (click)="onSubmit()">Submit my
+        answers</button>
+
+
+
+    <div class="[ overlay__white ]" *ngIf="taskPosting || taskCompleted">
+
+
+        <div class="[ flex flex-col items-center ]" *ngIf="taskPosting && !taskCompleted">
+            <div class="lds-facebook">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <p class="[ text-4xl font-bold ]">Submiting your answers</p>
+        </div>
+
+
+
+        <div class="[ flex flex-col items-center ]" *ngIf="taskCompleted">
+            <span class="[ text-6xl font-bold text-green-400 ]">✔</span>
+            <p class="[ text-4xl font-bold ]">Your answers have been submited</p>
+            <p class="[ text-4xl font-bold ]">Thanks for participating</p>
+        </div>
+
+
+    </div>

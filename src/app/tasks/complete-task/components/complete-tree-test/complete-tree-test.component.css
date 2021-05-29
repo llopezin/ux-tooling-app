@@ -1,0 +1,15 @@
+.tt__heading { 
+    @apply flex flex-grow items-center ml-2 text-xl
+} 
+
+.tt__item  {
+    @apply flex p-3 bg-white border border-primary border-t-0 capitalize 
+}
+
+.hideChildren > *{
+    display: none;
+}
+
+.hideChildren > .tt__item{
+    display: block;
+}
