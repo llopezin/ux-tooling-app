@@ -12,7 +12,7 @@ export class CompleteTaskComponent implements OnInit {
 
   public task: Task;
   public task_id: string;
-  public isActive: boolean;
+  public isActive: boolean = true;
   
   constructor(private taskService: CompleteTaskService, private route: ActivatedRoute) {
     this.task_id = this.route.snapshot.paramMap.get('id')

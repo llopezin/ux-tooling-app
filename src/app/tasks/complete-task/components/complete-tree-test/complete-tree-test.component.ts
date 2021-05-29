@@ -20,6 +20,7 @@ export class CompleteTreeTestComponent implements OnInit {
 
   ngOnInit(): void {
     this.taskCompleted = this.completedTaskStore.hasCompletedTask()
+    console.log('this.taskCompleted:', this.taskCompleted)
   }
 
   changeChildrenDisplay(e) {
@@ -28,8 +29,10 @@ export class CompleteTreeTestComponent implements OnInit {
   }
 
   selectItem(e) {
-    const taskId = +e.target.id + 1
+    const taskId = +e.target.id + 1;
+    this.removeSelected()
     let parent = e.target.parentElement.parentElement
+    e.target.parentElement.classList.add("selected")
     const path = []
 
     while (parent.id != "headings") {
@@ -38,6 +41,11 @@ export class CompleteTreeTestComponent implements OnInit {
     }
 
     this.response[taskId] = path.reverse()
+  }
+
+  removeSelected(){
+    let selected = document.querySelector(".selected")
+    selected?.classList?.remove("selected")
   }
 
   onSubmit() {

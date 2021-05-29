@@ -1,0 +1,28 @@
+<div class="[ p-10 m-14 ] [ bg-background ] [ rounded-lg shadow-lg ]" *ngFor="let task of task?.tasks, let i = index">
+    <h2 class="[ heading__secondary ]">{{task.task}}</h2>
+
+    <table class="[ w-full bg-white border border-primary border-collapse rounded-lg my-10 ]">
+
+        <tr class="[ bg-primary ]">
+            <th>Selected Category</th>
+            <th>Path</th>
+            <th>Total users</th>
+            <th>Percentage</th>
+        </tr>
+
+
+        <tr *ngFor="let task of responsesData[i+1] | keyvalue">
+            <td>{{task.key}}</td>
+            <td  class="[ flex flex-wrap justify-center ]">
+                <div *ngFor="let heading of task.value.path; let i = index">
+                    {{ heading }} <span *ngIf="i !== task.value.path.length - 1">→</span>
+                </div>
+            </td>
+            <td>{{task.value.count}}</td>
+            <td>{{getPercentage(task.value.count)}}%</td>
+        </tr>
+
+
+    </table>
+
+</div>

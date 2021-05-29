@@ -11,5 +11,9 @@
 }
 
 .hideChildren > .tt__item{
-    display: block;
+    display: flex;
+}
+
+.selected {
+    @apply border-8 border-primary
 }

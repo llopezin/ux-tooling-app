@@ -10,7 +10,7 @@ export interface Task{
     categories?: string[],
     cards?: string[],
     instructions?: string,
-    tasks?: {},
+    tasks?: [],
     headings?: {},
     results: object
 }

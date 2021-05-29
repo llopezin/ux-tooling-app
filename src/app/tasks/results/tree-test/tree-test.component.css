@@ -1,0 +1,11 @@
+tr {
+    @apply border border-t border-primary
+}
+
+td {
+    @apply p-3 border-l  border-primary text-center
+}
+
+th {
+    @apply p-3
+}

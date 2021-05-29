@@ -12,6 +12,7 @@ export class CompletedTaskUserStoreService {
 
   
   constructor() {
+    console.log('this.getcompletedFromCookies():', this.getcompletedFromCookies())
     this._completed = this.getcompletedFromCookies() || null;
   }
 
@@ -25,22 +26,16 @@ export class CompletedTaskUserStoreService {
   }
 
   hasCompletedTask() {
-    return this.completed !== null;
+    return this.completed != null;
   }
 
   completeTask(task){
-    console.log('this.getcompletedFromCookies():', this.getcompletedFromCookies())
-    let completed = JSON.parse(this.getcompletedFromCookies())
- 
-
-    completed.push(task)
-
-    this._completed = completed
-    document.cookie = `completed=${completed}` 
+    this._completed = task
+    document.cookie = `completed=${task}` 
   }
 
   getcompletedFromCookies(){
-   return document.cookie.replace(/(?:(?:^|.*;\s*)completed\s*\=\s*([^;]*).*$)|^.*$/, "$1") || "[]";
+   return document.cookie.replace(/(?:(?:^|.*;\s*)completed\s*\=\s*([^;]*).*$)|^.*$/, "$1") || null;
   }
 
 }
