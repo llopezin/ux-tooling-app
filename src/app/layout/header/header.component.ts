@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit {
     this.router.events.subscribe(e => {
       if (e instanceof NavigationEnd) {
         this.isCampaigns = e.url === "/campaigns"
-        console.log('e.url:', e.url)
       }
     });
   }

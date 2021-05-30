@@ -12,7 +12,6 @@ export class CompletedTaskUserStoreService {
 
   
   constructor() {
-    console.log('this.getcompletedFromCookies():', this.getcompletedFromCookies())
     this._completed = this.getcompletedFromCookies() || null;
   }
 

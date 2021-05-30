@@ -14,7 +14,7 @@ import { UserService } from './user/services/user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'ux-tooling-app';
+  title = 'Bucle.app';
 
   public userIsStored: boolean;
   public userhasLoggedIn: boolean;

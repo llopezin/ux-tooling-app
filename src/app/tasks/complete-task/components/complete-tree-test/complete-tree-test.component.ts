@@ -20,7 +20,6 @@ export class CompleteTreeTestComponent implements OnInit {
 
   ngOnInit(): void {
     this.taskCompleted = this.completedTaskStore.hasCompletedTask()
-    console.log('this.taskCompleted:', this.taskCompleted)
   }
 
   changeChildrenDisplay(e) {

@@ -22,8 +22,6 @@ export class TreeTestComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTask()
-    console.log(this.responsesData);
-
   }
 
 

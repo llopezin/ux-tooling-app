@@ -87,7 +87,6 @@ export class CardSortingComponent implements OnInit {
       datasets.push(newDataset(card, data, this.random_rgba()))
     })
 
-    console.log('datasets:', datasets)
     return datasets
   }
 
