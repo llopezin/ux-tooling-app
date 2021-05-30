@@ -59,7 +59,7 @@
 
 /* Borders */
 .gradient-border{
-    border-bottom: solid 3px;
+    border-bottom: solid 5px;
     border-image-slice: 1;
     border-image-source: linear-gradient(to right, #fe9873, #ffc580);
 }

@@ -1,0 +1,20 @@
+.arrow-right:after {
+    content: ' \279C';
+    @apply text-primary absolute right-4
+}
+
+li {
+    @apply relative 
+}
+
+li > div:hover{
+    @apply bg-primary-light
+}
+
+li > div:hover::after{
+    @apply text-white
+}
+
+svg {
+
+}

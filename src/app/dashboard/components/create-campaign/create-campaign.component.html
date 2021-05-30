@@ -1,7 +1,7 @@
 <button class="[ -mt-8 ] [ float-right ]" [ngClass]="formOpened ? '' : 'btn__primary-color' "
     (click)="formOpened = !formOpened">{{formOpened? '×' : 'New campaign'}}</button>
 
-<div class="[ overlay__white ]" *ngIf="formOpened">
+<div class="[ overlay__white z-10 ]" *ngIf="formOpened">
 
     <div class="[ p-14 mt-8  mb-48 max-w-screen-md ] [ bg-background ] [ rounded-lg shadow-2xl ]">
 

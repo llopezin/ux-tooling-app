@@ -2,13 +2,17 @@
 
     <div class="[ max-w-screen-xl mx-auto pb-5 relative ]">
 
-        <div class="[ max-w-screen-lg mx-auto ]">
-            <h1 class="[ heading__main ] [ py-6 ] [ text-center ]">Bucle App</h1>
+        <div class="[ max-w-screen-lg mx-auto mt-5 ]">
+            <h1 class="[ heading__main ] [ pt-10 pb-1 ] [ text-center ]">Bucle App</h1>
         </div>
-        
-        <a class="[ back-link ] [ text-xl font-bold font-heading ]" *ngIf="!isCampaigns" routerLink="campaigns">My campaigns</a>
-        
-        <a class="[ heading__secondary ] [ absolute top-5 right-5 ] [ underline ]" routerLink="my-account">My Account</a>
+
+        <a class="[ back-link ] [ text-xl font-bold font-heading ] [ hover:underline hover:bg-primary-light ]"
+            *ngIf="!isCampaigns" routerLink="campaigns">My campaigns</a>
+
+        <a class="[ heading__secondary ] [ absolute top-5 right-5 ] [ underline ] [ hover:bg-primary-light ]"
+            routerLink="my-account">My Account
+        </a>
+
 
     </div>
 

@@ -3,4 +3,4 @@
 <main class="[ min-h-full max-w-screen-xl mx-auto ] [ text-lg ]">
     <router-outlet></router-outlet>
 </main>
-<!-- <app-footer *ngIf="userIsLoggedIn"></app-footer> -->
+<app-footer *ngIf="userIsLoggedIn && !isCompleteTask"></app-footer> 
