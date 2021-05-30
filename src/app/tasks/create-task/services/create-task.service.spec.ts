@@ -18,12 +18,9 @@ describe('CreateTaskService', () => {
     httpClientSpy = jasmine.createSpyObj('HttpClient', [
       'get',
       'post',
-      'put',
+      'put', 
       'delete',
     ]);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
 });

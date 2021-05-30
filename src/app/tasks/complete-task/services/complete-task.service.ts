@@ -19,7 +19,7 @@ export class CompleteTaskService {
   }
 
   postResponse(id, response): Observable<Task> {
-    console.log('id:', id)
     return this.http.post<Task>(`${this.API_ENDPOINT}/tasks/${id}/response`, response)
   } 
 }
+ 

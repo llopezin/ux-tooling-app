@@ -27,15 +27,15 @@
 
 /* Buttons */
 .btn{
-  @apply  p-2  hover:bg-opacity-90  rounded-md shadow-md hover:shadow-xl;
+  @apply  p-2  hover:bg-opacity-90  rounded-md shadow-md hover:shadow-xl font-heading;
 }
 
 .btn__text-color{
-    @apply  p-2 bg-text hover:bg-opacity-90 text-white rounded-md shadow-md hover:shadow-xl;
+    @apply  p-2 bg-text hover:bg-opacity-90 text-white rounded-md shadow-md hover:shadow-xl font-heading;
 }
 
 .btn__primary-color{
-    @apply  p-2 bg-primary hover:bg-opacity-90 text-white rounded-md shadow-md hover:shadow-xl;
+    @apply  p-2 bg-primary hover:bg-opacity-90 text-white rounded-md shadow-md hover:shadow-xl font-heading;
 }
 
 .btn__primary-light{

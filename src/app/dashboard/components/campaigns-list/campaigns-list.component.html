@@ -9,13 +9,15 @@
 
 </form>
 
-<div class="[ mt-12 py-10 ] [ bg-background ] [ rounded-md shadow-lg ]" *ngIf="!campaigns || campaigns?.length === 0">
-    <p class="[ p-2 text-center w-full ] [ text-xl ]">You have not created your first campaign yet</p>
+<div *ngIf="!loading">
+    <div class="[ mt-12 py-10 ] [ bg-background ] [ rounded-md shadow-lg ]" *ngIf="!campaigns || campaigns?.length === 0">
+        <p class="[ p-2 text-center w-full ] [ text-xl ]">You have not created your first campaign yet</p>
+    </div>
 </div>
 
-<ul class="[ mx-auto my-10 ] [ bg-white ] [ rounded-lg shadow-2xl ]">
+<ul class="[ mx-auto my-10 ]">
     <li *ngFor="let campaign of campaigns" [routerLink]="['/campaign', campaign._id]">
-        <div class="[ p-2 ] [ text-lg ] [ border border-primary cursor-pointer ]"
-            *ngIf="campaign.name.indexOf(searchForm.get('search').value) > -1">{{campaign.name}}</div>
+        <div class="[ p-3 pl-6 my-2 ] [ text-lg font-bold ] [ bg-background rounded-md shadow-md cursor-pointer ]"
+            *ngIf="campaign.name.toLowerCase().indexOf(searchForm.get('search').value.toLowerCase()) > -1">{{campaign.name}}</div>
     </li>
 </ul>

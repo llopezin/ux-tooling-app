@@ -1,21 +1,32 @@
-<button class="[ -mt-8 ] [ float-right ]" [ngClass]="formOpened ? '' : 'btn__primary-color' " (click)="formOpened = !formOpened"
-  >{{formOpened? '×' : 'New campaign'}}</button>
+<button class="[ -mt-8 ] [ float-right ]" [ngClass]="formOpened ? '' : 'btn__primary-color' "
+    (click)="formOpened = !formOpened">{{formOpened? '×' : 'New campaign'}}</button>
 
-<form (ngSubmit)="onSubmit()" [formGroup]="newCampaignForm" *ngIf="formOpened">
+<div class="[ overlay__white ]" *ngIf="formOpened">
 
-    <div class="[ my-4 ]">
+    <div class="[ p-14 mt-8  mb-48 max-w-screen-md ] [ bg-background ] [ rounded-lg shadow-2xl ]">
 
-        <input class="[ input__primary ]" type="text" placeholder="campaign name" required name="name"
-            formControlName="name" />
+        <button class="[ formOpened ] [ -mt-8 ] [ float-right ]" 
+    (click)="formOpened = !formOpened">×</button>
 
-        <div *ngIf="newCampaignForm.get('name').touched">
-            <div *ngIf="newCampaignForm.get('name').errors?.required">Name is required</div>
-        </div>
+        <form (ngSubmit)="onSubmit()" [formGroup]="newCampaignForm">
 
+            <div class="[ my-4 ]">
+
+                <label class="[ heading__secondary ]" for="newCampaign">Your new campaign</label>
+                <input class="[ input__primary my-4 ]" type="text" placeholder="What will be the name of your campaign?"
+                    required name="name" formControlName="name" id="newCampaign" />
+
+                <div *ngIf="newCampaignForm.get('name').touched">
+                    <div *ngIf="newCampaignForm.get('name').errors?.required">Name is required</div>
+                </div>
+
+            </div>
+
+            <div class="[ flex justify-end ]">
+                <button class="[ btn__primary-color ]" type="submit">Create campaign</button>
+            </div>
+
+        </form>
     </div>
 
-    <div class="[ flex justify-end ]">
-        <button class="[ btn__primary-color ]" type="submit">Create campaign</button>
-    </div>
-
-</form>
+</div>

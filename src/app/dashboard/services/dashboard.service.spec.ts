@@ -59,7 +59,7 @@ it('should create a new workspace', () => {
   expect(httpClientSpy.post.calls.count()).toBe(1, 'one call');
 });
 
-it('should return expected campaigns', () => {
+it('should return expected workspace campaigns', () => {
   let campaign_ids = ["1", "2"]
   httpClientSpy.post.and.returnValue(of(mockCampaigns));
 

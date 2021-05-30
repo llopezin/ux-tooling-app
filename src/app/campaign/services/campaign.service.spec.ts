@@ -44,7 +44,7 @@ describe('CampaignService', () => {
     expect(httpClientSpy.get.calls.count()).toBe(1, 'one call');
   });
 
-  it('should add task to campaign', () => {
+  it('should create task into campaign', () => {
     httpClientSpy.post.and.returnValue(of(mockCampaigns[0]));
 
     service

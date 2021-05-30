@@ -16,6 +16,7 @@ export class CampaignsListComponent implements OnInit {
   public campaigns: Campaign[];
   public campaign_ids: string[];
   public searchForm: FormGroup;
+  public loading: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -27,7 +28,9 @@ export class CampaignsListComponent implements OnInit {
   }
 
   subscribeToCampaignsStore() {
-    this.store.select('workspaceApp').subscribe(({ workspace }) => {
+    this.store.select('workspaceApp').subscribe((state) => {
+      this.loading = state.loading
+      let workspace = state.workspace
       if (!workspace) return
       this.getCampaigns(workspace)
       this.campaigns = workspace?.campaigns
