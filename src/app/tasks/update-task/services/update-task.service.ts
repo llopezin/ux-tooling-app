@@ -10,7 +10,7 @@ import {UserStoreService} from 'src/app/shared/services/user-store.service';
 })
 export class updateTaskService {
 
-  private API_ENDPOINT = "https://bucle-app.herokuapp.com/api/"
+  private API_ENDPOINT = "https://bucle-app.herokuapp.com/api"
 
   constructor(private http: HttpClient, private userStore: UserStoreService) { }
 

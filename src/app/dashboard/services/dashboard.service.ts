@@ -11,7 +11,7 @@ import { Workspace } from '../../shared/models/workspace.model';
   providedIn: 'root'
 })
 export class DashboardService {
-  private API_ENDPOINT = "https://bucle-app.herokuapp.com/api/"
+  private API_ENDPOINT = "https://bucle-app.herokuapp.com/api"
 
 
   constructor(private http: HttpClient, private userStore: UserStoreService) { }

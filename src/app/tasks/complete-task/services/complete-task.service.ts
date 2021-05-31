@@ -10,7 +10,7 @@ import { Task } from 'src/app/campaign/models/task.model';
 })
 export class CompleteTaskService {
 
-  private API_ENDPOINT = "https://bucle-app.herokuapp.com/api/"
+  private API_ENDPOINT = "https://bucle-app.herokuapp.com/api"
 
   constructor(private http: HttpClient) { }
 

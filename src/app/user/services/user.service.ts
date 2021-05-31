@@ -11,7 +11,7 @@ import { map } from "rxjs/operators";
 
 export class UserService {
   
-  private API_ENDPOINT = "https://bucle-app.herokuapp.com/api/"
+  private API_ENDPOINT = "https://bucle-app.herokuapp.com/api"
   private loginRoute = `${this.API_ENDPOINT}/auth/login`; 
   private registerRoute = `${this.API_ENDPOINT}/register`; 
 
