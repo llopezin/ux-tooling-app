@@ -10,7 +10,7 @@ import { Workspace } from '../models/workspace.model';
   providedIn: 'root'
 })
 export class workspaceService {
-  private API_ENDPOINT = "/api"; //add endpoint here when api is deployed
+  private API_ENDPOINT = https://bucle-app.herokuapp.com/api/
 
 
   constructor(private http: HttpClient, private userStore: UserStoreService) { }

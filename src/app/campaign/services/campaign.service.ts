@@ -10,7 +10,7 @@ import { Task } from '../models/task.model';
   providedIn: 'root'
 })
 export class CampaignService {
-  private API_ENDPOINT = "/api"; //add endpoint here when api is deployed
+  private API_ENDPOINT = https://bucle-app.herokuapp.com/api/
   
 
   constructor(private http: HttpClient, private userStore: UserStoreService) { }
