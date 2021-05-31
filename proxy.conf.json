@@ -3,5 +3,6 @@
       "target": "https://bucle-app.herokuapp.com/",
       "secure": false,
       "logLevel": "debug"
-    }
+    },
+    "changeOrigin": true
 }

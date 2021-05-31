@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendUrl: '/api'
+  apiUrl: 'https://bucle-app.herokuapp.com/api'
 };
