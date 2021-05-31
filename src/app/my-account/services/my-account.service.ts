@@ -9,7 +9,7 @@ import { User } from 'src/app/user/models/user';
 })
 export class MyAccountService {
 
-  private API_ENDPOINT = https://bucle-app.herokuapp.com/api/
+  private API_ENDPOINT = "https://bucle-app.herokuapp.com/api/"
   
 
   constructor(private http: HttpClient, private userStore: UserStoreService) { }

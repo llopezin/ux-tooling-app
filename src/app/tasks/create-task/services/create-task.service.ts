@@ -6,7 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class CreateTaskService {
 
-  private API_ENDPOINT = https://bucle-app.herokuapp.com/api/
+  private API_ENDPOINT = "https://bucle-app.herokuapp.com/api/"
   
   constructor(private http: HttpClient) { }
 
