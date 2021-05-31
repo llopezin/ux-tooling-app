@@ -4,7 +4,7 @@
     <h3 class="[ font-bold ]">{{task.name}}</h3>
 
     <textarea class="[ sr-only ]" [id]="'link'+task._id"
-        [value]="'http://localhost:4200/complete-task/'+task._id"></textarea>
+        [value]="'https://bucle.netlify.app/complete-task/'+task._id"></textarea>
 
     <button class="[ -mt-3 ] [ text-left underline ]" (click)="copyLinkToClipboard()">{{linkCopied ? 'Copied to clipboard' :'Copy link'}}</button>
 
