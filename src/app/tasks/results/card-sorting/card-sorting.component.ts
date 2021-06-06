@@ -73,7 +73,7 @@ export class CardSortingComponent implements OnInit {
   }
 
   getPercentage(usersCount) {
-    return usersCount / (this.task.responses.length / 100)
+    return Math.round(usersCount / (this.task.responses.length / 100))
   }
 
   buildDatasets() {
