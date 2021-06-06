@@ -57,7 +57,7 @@ la URL del servidor local de la API_
 
 ## Ejecutando las pruebas ⚙️
 
-_Para ejecutar las pruebas del proyecto utilizando karma [Karma](https://karma-runner.github.io)emplear el comando_
+_Para ejecutar las pruebas del proyecto utilizando karma [Karma](https://karma-runner.github.io) emplear el comando_
 
 ```
 npm run test
