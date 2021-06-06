@@ -39,13 +39,13 @@
 
                 <div class="[ my-4 ]" *ngIf="item.value.tags !== undefined">
 
-                    <label [for]="'tags'+ i">Tags</label>
+                    <label class="[ hidden ]" [for]="'tags'+ i">Tags</label>
                     <p>Tags are unique answers your question, users will only be able to pick one</p>
                     <input class="[ input__primary ]" type="text" placeholder="Type the tags separated by commas"
                         required name="tags" formControlName="tags" [id]="'tags'+ i" />
 
                 </div>
-
+ 
         </div>
 
     </div>

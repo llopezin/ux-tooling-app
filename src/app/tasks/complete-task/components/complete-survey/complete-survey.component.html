@@ -27,11 +27,11 @@
         </div>
 
 
-        <div *ngFor="let tag of question?.tags?.split(','); let tagIndex=index">
-
-            <input type="radio" [name]="'question'+(i+1)" [formControlName]="'question'+(i+1)" [id]="'tag'+(i+1)+'.'+(tagIndex+1)" [value]="tag" />
-            <label class="[ ml-3 ]" [for]="'tag'+(i+1)+'.'+(tagIndex+1)" >{{tag}}</label>
-
+        <div class="[ flex justify-evenly py-3 ]">
+            <div *ngFor="let tag of question?.tags?.split(','); let tagIndex=index">
+                <input type="radio" [name]="'question'+(i+1)" [formControlName]="'question'+(i+1)" [id]="'tag'+(i+1)+'.'+(tagIndex+1)" [value]="tag" />
+                <label class="[ ml-3 ]" [for]="'tag'+(i+1)+'.'+(tagIndex+1)" >{{tag}}</label>
+            </div>
         </div>
 
 
