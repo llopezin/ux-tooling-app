@@ -57,7 +57,8 @@ export class UpdateTaskComponent implements OnInit {
 
   }
 
-  updateSurvey({ questions }) {
+  updateSurvey(event) {
+    let questions = event?.questions || []
     this.task = { ...this.newTaskForm.value, questions, _id: this.task_id }
 
     this.taskService.updateTask(this.task_id, this.task).subscribe(res => {
@@ -65,7 +66,6 @@ export class UpdateTaskComponent implements OnInit {
       this.navigateToCampaign()
     })
 
-    //dispatch get tasks
 
     this.taskPosting = true
   }

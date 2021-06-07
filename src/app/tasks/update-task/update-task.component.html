@@ -40,9 +40,9 @@
 
         <div>
 
-            <app-update-survey (updateSurvey)="updateSurvey($event)" [task]="task" *ngIf="task?.type"></app-update-survey>
-            <app-update-card-sorting *ngIf="task?.type === 'Card sorting'"></app-update-card-sorting>
-            <app-update-tree-test *ngIf="task?.type === 'Tree test'"></app-update-tree-test>
+            <app-update-survey (updateSurvey)="updateSurvey($event)" [task]="task" *ngIf="task?.type?.toLowerCase()  === 'survey'"></app-update-survey>
+            <app-update-card-sorting (updateSurvey)="updateSurvey($event)" *ngIf="task?.type === 'Card sorting'"></app-update-card-sorting>
+            <app-update-tree-test (updateSurvey)="updateSurvey($event)" *ngIf="task?.type === 'Tree test'"></app-update-tree-test>
     
         </div>   
 

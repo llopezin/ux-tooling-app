@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'app-update-tree-test',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateTreeTestComponent implements OnInit {
 
+  @Output() updateSurvey: EventEmitter<any> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onSubmit() {
+    this.updateSurvey.emit()
+ }
+ 
 }
